@@ -11,11 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var botchat_component_1 = require('./chat/botchat.component');
 var userchat_component_1 = require('./chat/userchat.component');
+var convo_service_1 = require('../services/convo.service');
 var ConvoAreaComponent = (function () {
-    function ConvoAreaComponent() {
+    function ConvoAreaComponent(convoService) {
+        var _this = this;
+        this.convoService = convoService;
         this.userInput = "You: ";
-        this.botResponse = "Harply: ";
+        this.botResponse = "Harply: " + this.convoService.defaultMessage;
+        convoService.userSpoke$.subscribe(function (message) {
+            _this.whenUserSpeaks(message);
+        });
     }
+    ConvoAreaComponent.prototype.whenUserSpeaks = function (message) {
+        this.userInput = "You: " + message;
+        console.log("event recieved");
+    };
     ConvoAreaComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -24,7 +34,7 @@ var ConvoAreaComponent = (function () {
             inputs: ['userInput'],
             directives: [botchat_component_1.BotChatComponent, userchat_component_1.UserChatComponent]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [convo_service_1.ConvoService])
     ], ConvoAreaComponent);
     return ConvoAreaComponent;
 }());

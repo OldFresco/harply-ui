@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { BotChatComponent } from './chat/botchat.component';
 import { UserChatComponent } from './chat/userchat.component';
+import { ConvoService } from '../services/convo.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     moduleId: module.id,
@@ -12,11 +14,22 @@ import { UserChatComponent } from './chat/userchat.component';
 
 export class ConvoAreaComponent {
 
+    public userInputStream: Observable<string>;
     public userInput: string;
     public botResponse: string;
 
-    constructor() {
+    constructor(private convoService: ConvoService) {
         this.userInput = "You: ";
-        this.botResponse = "Harply: ";
+        this.botResponse = "Harply: " + this.convoService.defaultMessage;
+
+        convoService.userSpoke$.subscribe(
+            message => {
+                this.whenUserSpeaks(message);
+            });
+    }
+
+    private whenUserSpeaks(message: string): void {
+        this.userInput = "You: " + message;
+        console.log("event recieved");
     }
 }

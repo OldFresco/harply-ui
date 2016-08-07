@@ -13,16 +13,10 @@ var convo_service_1 = require('../services/convo.service');
 var ConvoInputComponent = (function () {
     function ConvoInputComponent(convoService) {
         this.convoService = convoService;
-        this.userSpokeEvent = new core_1.EventEmitter();
-        this.convoService.userInput = "How can I help?";
     }
     ConvoInputComponent.prototype.userSays = function (maininput) {
-        var _this = this;
-        this.userMessage = maininput.value;
-        this.userSpokeEvent.emit({ value: this.userMessage });
-        this.convoService.userInput = this.userSpokeEvent.subscribe(function (data) { return _this.userMessage = _this.convoService.userInput; });
+        this.convoService.announceUserSpoke(maininput.value);
         console.log(maininput.value);
-        console.log(this.convoService.userInput);
         maininput.value = null;
     };
     ConvoInputComponent = __decorate([
@@ -30,8 +24,6 @@ var ConvoInputComponent = (function () {
             moduleId: module.id,
             selector: 'convo-input',
             templateUrl: './convoinput.template.html',
-            outputs: ['userSpokeEvent'],
-            providers: [convo_service_1.ConvoService]
         }), 
         __metadata('design:paramtypes', [convo_service_1.ConvoService])
     ], ConvoInputComponent);

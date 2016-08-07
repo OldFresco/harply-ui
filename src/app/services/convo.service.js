@@ -9,9 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var Subject_1 = require('rxjs/Subject');
 var ConvoService = (function () {
     function ConvoService() {
+        this.userInputSource = new Subject_1.Subject();
+        this.userSpoke$ = this.userInputSource.asObservable();
+        this.defaultMessage = "Hi! How can I help?";
     }
+    ConvoService.prototype.announceUserSpoke = function (message) {
+        this.userInputSource.next(message);
+    };
     ConvoService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])

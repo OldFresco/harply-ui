@@ -1,0 +1,208 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat+Alternates);
+* {
+    margin: 0;
+    padding: 0;
+    font: 12pt Arial;
+}
+
+.convoarea {
+    padding-right: 35px;
+    padding-left: 35px;
+}
+
+body {
+    background-color: rgb(26, 188, 156);
+}
+
+.field {
+    display: flex;
+    position: realtive;
+    margin: 5em auto;
+    width: 70%;
+    flex-direction: row;
+    box-shadow: 1px 1px 0 rgb(22, 160, 133), 2px 2px 0 rgb(22, 160, 133), 3px 3px 0 rgb(22, 160, 133), 4px 4px 0 rgb(22, 160, 133), 5px 5px 0 rgb(22, 160, 133), 6px 6px 0 rgb(22, 160, 133), 7px 7px 0 rgb(22, 160, 133);
+}
+
+.field>input[type=text],
+.field>button {
+    display: block;
+    font: 1.2em 'Montserrat Alternates';
+}
+
+.field>input[type=text] {
+    flex: 1;
+    padding: 0.6em;
+    border: 0.2em solid rgb(26, 188, 156);
+}
+
+.field>button {
+    padding: 0.6em 0.8em;
+    background-color: rgb(26, 218, 156);
+    color: white;
+    border: none;
+}
+
+
+/* talk bubble contents */
+
+.talktext {
+    font: 1.2em 'Montserrat Alternates';
+    padding: 1em;
+    text-align: left;
+}
+
+.talktext-bot p {
+    /* remove webkit p margins */
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    font-size: x-large;
+    color: antiquewhite;
+    font-weight: bold;
+}
+
+.talktext-user p {
+    /* remove webkit p margins */
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.user-bubble {
+    margin: 40px;
+    position: relative;
+    height: auto;
+    background-color: moccasin;
+    text-align: right;
+    transition: 0.5s ease-in-out;
+}
+
+.user-bubble:hover {
+    padding: 2%;
+}
+
+.bot-bubble {
+    position: relative;
+    height: auto;
+    background-color: darksalmon;
+    transition: 0.5s ease-in-out;    
+}
+
+.bot-bubble:hover {
+    padding: 2%;
+}
+
+.border {
+    border: 8px solid rgb(22, 160, 133);
+}
+
+.round {
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+}
+
+.tri-right.border.left-in:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -40px;
+    right: auto;
+    top: 30px;
+    bottom: auto;
+    border: 20px solid;
+    border-color: #666 #666 transparent transparent;
+}
+
+.tri-right.left-in:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -20px;
+    right: auto;
+    top: 38px;
+    bottom: auto;
+    border: 12px solid;
+    border-color: lightyellow lightyellow transparent transparent;
+}
+
+.tri-right.border.btm-left:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -8px;
+    right: auto;
+    top: auto;
+    bottom: -40px;
+    border: 32px solid;
+    border-color: transparent transparent transparent #666;
+}
+
+.tri-right.btm-left:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 0px;
+    right: auto;
+    top: auto;
+    bottom: -20px;
+    border: 22px solid;
+    border-color: transparent transparent transparent lightyellow;
+}
+
+
+/*Right triangle, placed bottom left side slightly in*/
+
+.tri-right.border.btm-left-in:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 30px;
+    right: auto;
+    top: auto;
+    bottom: -40px;
+    border: 20px solid;
+    border-color: rgb(22, 160, 133) transparent transparent rgb(22, 160, 133);
+}
+
+.tri-right.btm-left-in:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 38px;
+    right: auto;
+    top: auto;
+    bottom: -20px;
+    border: 12px solid;
+    border-color: darksalmon transparent transparent darksalmon;
+}
+
+.tri-right.border.btm-right-in:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: 30px;
+    bottom: -40px;
+    border: 20px solid;
+    border-color: rgb(22, 160, 133) rgb(22, 160, 133) transparent transparent;
+}
+
+.tri-right.btm-right-in:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: 38px;
+    bottom: -20px;
+    border: 12px solid;
+    border-color: moccasin moccasin transparent transparent;
+}

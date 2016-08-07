@@ -1,0 +1,4 @@
+<div class="field" id="convoform">
+    <input #maininput (keyup.enter)="userSays(maininput)" type="text" id="convotext" placeholder="Say something..." />
+    <button type="button" (click)="userSays(maininput)" id="go">Go </button>
+</div>

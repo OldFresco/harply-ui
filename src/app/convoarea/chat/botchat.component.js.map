@@ -1,0 +1,1 @@
+{"version":3,"file":"botchat.component.js","sourceRoot":"","sources":["botchat.component.ts"],"names":[],"mappings":";;;;;;;;;;AAAA,qBAA0B,eAAe,CAAC,CAAA;AAS1C;IAII;IACA,CAAC;IAZL;QAAC,gBAAS,CAAC;YACP,QAAQ,EAAE,MAAM,CAAC,EAAE;YACnB,QAAQ,EAAE,SAAS;YACnB,MAAM,EAAE,CAAC,aAAa,CAAC;YACvB,WAAW,EAAE,yBAAyB;SACzC,CAAC;;wBAAA;IAQF,uBAAC;AAAD,CAAC,AAND,IAMC;AANY,wBAAgB,mBAM5B,CAAA"}

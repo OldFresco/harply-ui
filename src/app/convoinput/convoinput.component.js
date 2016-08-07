@@ -16,7 +16,6 @@ var ConvoInputComponent = (function () {
     }
     ConvoInputComponent.prototype.userSays = function (maininput) {
         this.convoService.announceUserSpoke(maininput.value);
-        console.log(maininput.value);
         maininput.value = null;
     };
     ConvoInputComponent = __decorate([

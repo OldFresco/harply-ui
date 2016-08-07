@@ -14,8 +14,6 @@ export class ConvoInputComponent {
 
   userSays(maininput: HTMLInputElement) {
     this.convoService.announceUserSpoke(maininput.value);
-    
-    console.log(maininput.value);
     maininput.value = null;
   }
 }

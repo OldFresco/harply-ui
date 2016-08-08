@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
     directives: [BotChatComponent, UserChatComponent]
 })
 
-export class ConvoAreaComponent{
+export class ConvoAreaComponent {
 
     private userHasSpoken: boolean = false;
     public userInputStream: Observable<string>;
@@ -33,5 +33,7 @@ export class ConvoAreaComponent{
         this.userInputs.push('You: ' + message);
         this.userHasSpoken = true;
         console.log('event recieved');
+
+        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     }
 }

@@ -16,7 +16,7 @@ var BotChatComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'botchat',
-            inputs: ['botResponse'],
+            inputs: ['message'],
             templateUrl: './botchat.template.html'
         }), 
         __metadata('design:paramtypes', [])

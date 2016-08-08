@@ -10,12 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var convo_service_1 = require('../services/convo.service');
+var chatmessage_1 = require('../models/chatmessage');
 var ConvoInputComponent = (function () {
     function ConvoInputComponent(convoService) {
         this.convoService = convoService;
+        var message = new chatmessage_1.ChatMessage();
+        message.content = '';
+        message.isBot = false;
+        this.message = message;
     }
     ConvoInputComponent.prototype.userSays = function (maininput) {
-        this.convoService.announceUserSpoke(maininput.value);
+        this.message.content = maininput.value;
+        this.convoService.announceNewMessage(this.message);
+        console.log('Start: ' + this.message.content);
         maininput.value = null;
     };
     ConvoInputComponent = __decorate([

@@ -9,24 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var convo_service_1 = require('../services/convo.service');
 var botchat_component_1 = require('./chat/botchat.component');
 var userchat_component_1 = require('./chat/userchat.component');
-var convo_service_1 = require('../services/convo.service');
 var ConvoAreaComponent = (function () {
     function ConvoAreaComponent(convoService) {
         var _this = this;
         this.convoService = convoService;
-        this.userHasSpoken = false;
-        this.botResponse = this.convoService.defaultMessage;
-        this.userInputs = [];
+        this.defaultBotResponse = "Hi! How can I help?";
+        this.messages = [];
         convoService.userSpoke$.subscribe(function (message) {
-            _this.whenUserSpeaks(message);
+            _this.whenSomeoneSpeaks(message.content);
         });
     }
-    ConvoAreaComponent.prototype.whenUserSpeaks = function (message) {
-        this.userInputs.push(message);
-        this.userHasSpoken = true;
-        console.log('event recieved');
+    ConvoAreaComponent.prototype.whenSomeoneSpeaks = function (message) {
+        this.messages.push(message);
+        this.latestMessage = message;
+        console.log('event recieved in convo area component' + this.latestMessage);
         $('html, body').animate({ scrollTop: $(document).height() }, 1000);
     };
     ConvoAreaComponent = __decorate([
@@ -34,7 +33,6 @@ var ConvoAreaComponent = (function () {
             moduleId: module.id,
             selector: 'convoarea',
             templateUrl: './convoarea.template.html',
-            inputs: ['userInput'],
             directives: [botchat_component_1.BotChatComponent, userchat_component_1.UserChatComponent]
         }), 
         __metadata('design:paramtypes', [convo_service_1.ConvoService])

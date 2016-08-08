@@ -16,7 +16,7 @@ var UserChatComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'userchat',
-            inputs: ['userInput'],
+            inputs: ['message'],
             templateUrl: './userchat.template.html'
         }), 
         __metadata('design:paramtypes', [])

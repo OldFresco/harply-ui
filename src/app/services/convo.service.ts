@@ -1,18 +1,18 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
+import { ChatMessage } from '../models/chatmessage';
 
 @Injectable()
 export class ConvoService {
 
-    private userInputSource = new Subject<string>();
+    private userInputSource = new Subject<ChatMessage>();
     public userSpoke$ = this.userInputSource.asObservable();
-    public defaultMessage: string;
 
     constructor() {
-        this.defaultMessage = 'Hi! How can I help?';
     }
 
-    announceUserSpoke(message: string) {
+    announceNewMessage(message: ChatMessage) {
     this.userInputSource.next(message);
+    console.log('user spoke event from service' + message.content);
   }
 }

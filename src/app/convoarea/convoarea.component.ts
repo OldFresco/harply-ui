@@ -1,38 +1,36 @@
-import { Component, AfterViewChecked, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ConvoService } from '../services/convo.service';
+import { ChatMessage } from '../models/chatmessage';
+import { Observable } from 'rxjs/Observable';
 import { BotChatComponent } from './chat/botchat.component';
 import { UserChatComponent } from './chat/userchat.component';
-import { ConvoService } from '../services/convo.service';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     moduleId: module.id,
     selector: 'convoarea',
     templateUrl: './convoarea.template.html',
-    inputs: ['userInput'],
     directives: [BotChatComponent, UserChatComponent]
 })
 
 export class ConvoAreaComponent {
 
-    private userHasSpoken: boolean = false;
-    public userInputStream: Observable<string>;
-    public userInputs: string[];
-    public botResponse: string;
+    public defaultBotResponse: string = "Hi! How can I help?";
+    public messages: string[];
+    public latestMessage: string;
 
     constructor(private convoService: ConvoService) {
-        this.botResponse = this.convoService.defaultMessage;
-        this.userInputs = [];
+        this.messages = [];
 
         convoService.userSpoke$.subscribe(
             message => {
-                this.whenUserSpeaks(message);
+                this.whenSomeoneSpeaks(message.content);
             });
     }
 
-    private whenUserSpeaks(message: string): void {
-        this.userInputs.push(message);
-        this.userHasSpoken = true;
-        console.log('event recieved');
+    private whenSomeoneSpeaks(message: string): void {
+        this.messages.push(message);
+        this.latestMessage = message;
+        console.log('event recieved in convo area component' + this.latestMessage);
 
         $('html, body').animate({ scrollTop: $(document).height() }, 1000);
     }

@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 @Component({
     moduleId: module.id,
     selector: 'userchat',
-    inputs: ['userInput'],
+    inputs: ['message'],
     templateUrl: './userchat.template.html'
 })
 
 export class UserChatComponent {
 
-    public userInput: string;
+    public message: string;
 
     constructor() {
     }

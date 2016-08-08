@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { ConvoService } from '../services/convo.service';
+import { ChatMessage } from '../models/chatmessage';
 
 @Component({
   moduleId: module.id,
@@ -9,11 +10,20 @@ import { ConvoService } from '../services/convo.service';
 
 export class ConvoInputComponent {
 
+  public message: ChatMessage;
+
   constructor(private convoService: ConvoService) {
+    let message = new ChatMessage();
+    message.content = '';
+    message.isBot = false;
+
+    this.message = message;
   }
 
   userSays(maininput: HTMLInputElement) {
-    this.convoService.announceUserSpoke(maininput.value);
+    this.message.content = maininput.value;
+    this.convoService.announceNewMessage(this.message);
+    console.log('Start: '+ this.message.content);
     maininput.value = null;
   }
 }

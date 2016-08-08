@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 @Component({
     moduleId: module.id,
     selector: 'botchat',
-    inputs: ['botResponse'],
+    inputs: ['message'],
     templateUrl: './botchat.template.html'
 })
 
 export class BotChatComponent {
 
-    public botResponse: string;
+    public message: string;
 
     constructor() {
     }

@@ -34,6 +34,6 @@ export class ConvoAreaComponent {
         this.userHasSpoken = true;
         console.log('event recieved');
 
-        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+        $('html, body').animate({ scrollTop: $(document).height() }, 1000);
     }
 }

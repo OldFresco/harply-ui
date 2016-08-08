@@ -27,7 +27,7 @@ var ConvoAreaComponent = (function () {
         this.userInputs.push('You: ' + message);
         this.userHasSpoken = true;
         console.log('event recieved');
-        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+        $('html, body').animate({ scrollTop: $(document).height() }, 1000);
     };
     ConvoAreaComponent = __decorate([
         core_1.Component({

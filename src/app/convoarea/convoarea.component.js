@@ -16,6 +16,7 @@ var ConvoAreaComponent = (function () {
     function ConvoAreaComponent(convoService) {
         var _this = this;
         this.convoService = convoService;
+        this.userHasSpoken = false;
         this.userInput = 'You: ';
         this.botResponse = 'Harply: ' + this.convoService.defaultMessage;
         convoService.userSpoke$.subscribe(function (message) {
@@ -24,6 +25,7 @@ var ConvoAreaComponent = (function () {
     }
     ConvoAreaComponent.prototype.whenUserSpeaks = function (message) {
         this.userInput = 'You: ' + message;
+        this.userHasSpoken = true;
         console.log('event recieved');
     };
     ConvoAreaComponent = __decorate([

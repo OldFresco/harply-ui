@@ -14,6 +14,7 @@ import { Observable } from 'rxjs/Observable';
 
 export class ConvoAreaComponent {
 
+    private userHasSpoken: boolean = false;
     public userInputStream: Observable<string>;
     public userInput: string;
     public botResponse: string;
@@ -30,6 +31,7 @@ export class ConvoAreaComponent {
 
     private whenUserSpeaks(message: string): void {
         this.userInput = 'You: ' + message;
+        this.userHasSpoken = true;
         console.log('event recieved');
     }
 }

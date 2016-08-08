@@ -1,4 +1,4 @@
 <div class="container convoarea">
     <botchat [botResponse]="botResponse"></botchat>
-    <userchat [userInput]="userInput"></userchat>
+    <userchat *ngIf="userHasSpoken" [userInput]="userInput"></userchat>
 </div>

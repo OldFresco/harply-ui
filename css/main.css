@@ -75,6 +75,7 @@ body {
     background-color: moccasin;
     text-align: right;
     transition: 0.5s ease-in-out;
+    float: right;
 }
 
 .user-bubble:hover {
@@ -82,10 +83,11 @@ body {
 }
 
 .bot-bubble {
+    float: left;
     position: relative;
     height: auto;
     background-color: darksalmon;
-    transition: 0.5s ease-in-out;    
+    transition: 0.5s ease-in-out;
 }
 
 .bot-bubble:hover {
@@ -205,4 +207,53 @@ body {
     bottom: -20px;
     border: 12px solid;
     border-color: moccasin moccasin transparent transparent;
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    /* make things invisible upon start */
+    -webkit-animation: fadeIn ease-in 1;
+    /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation: fadeIn ease-in 1;
+    animation: fadeIn ease-in 1;
+    -webkit-animation-fill-mode: forwards;
+    /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    -moz-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    animation-duration: 1s;
+}
+
+.fade-in.one {
+    -webkit-animation-delay: 0.4s;
+    -moz-animation-delay: 0.4s;
+    animation-delay: 0.4s;
 }

@@ -16,15 +16,15 @@ var ConvoAreaComponent = (function () {
     function ConvoAreaComponent(convoService) {
         var _this = this;
         this.convoService = convoService;
-        this.userInput = "You: ";
-        this.botResponse = "Harply: " + this.convoService.defaultMessage;
+        this.userInput = 'You: ';
+        this.botResponse = 'Harply: ' + this.convoService.defaultMessage;
         convoService.userSpoke$.subscribe(function (message) {
             _this.whenUserSpeaks(message);
         });
     }
     ConvoAreaComponent.prototype.whenUserSpeaks = function (message) {
-        this.userInput = "You: " + message;
-        console.log("event recieved");
+        this.userInput = 'You: ' + message;
+        console.log('event recieved');
     };
     ConvoAreaComponent = __decorate([
         core_1.Component({

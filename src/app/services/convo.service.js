@@ -14,7 +14,7 @@ var ConvoService = (function () {
     function ConvoService() {
         this.userInputSource = new Subject_1.Subject();
         this.userSpoke$ = this.userInputSource.asObservable();
-        this.defaultMessage = "Hi! How can I help?";
+        this.defaultMessage = 'Hi! How can I help?';
     }
     ConvoService.prototype.announceUserSpoke = function (message) {
         this.userInputSource.next(message);

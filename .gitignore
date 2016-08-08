@@ -43,6 +43,9 @@ npm-debug.log
 /typings/
 /tsd_typings/
 
+# Config Files
+.env
+
 # Dist #
 /dist
 /public/__build__/

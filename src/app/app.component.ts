@@ -5,7 +5,8 @@ import { ConvoAreaComponent } from './convoarea/convoarea.component';
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'app',
-  template: '<convo-input></convo-input><convoarea></convoarea>',
+  template: `<convo-input class="convoinput"></convo-input>
+  <convoarea class="convoarea"></convoarea>`,
   directives: [ConvoInputComponent, ConvoAreaComponent]
 })
 

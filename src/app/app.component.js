@@ -18,7 +18,7 @@ var AppComponent = (function () {
         core_1.Component({
             encapsulation: core_1.ViewEncapsulation.None,
             selector: 'app',
-            template: '<convo-input></convo-input><convoarea></convoarea>',
+            template: "<convo-input class=\"convoinput\"></convo-input>\n  <convoarea class=\"convoarea\"></convoarea>",
             directives: [convoinput_component_1.ConvoInputComponent, convoarea_component_1.ConvoAreaComponent]
         }), 
         __metadata('design:paramtypes', [])

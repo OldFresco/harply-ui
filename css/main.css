@@ -5,13 +5,22 @@
     font: 12pt Arial;
 }
 
-.convoarea {
-    padding-right: 35px;
-    padding-left: 35px;
-}
-
 body {
     background-color: rgb(26, 188, 156);
+}
+
+.convoinput {
+    z-index: 500;
+    position: fixed;
+    display: block;
+    width: 100%;
+}
+
+.convoarea {
+    position: relative!important;
+    padding-top: 180px;
+    padding-right: 35px;
+    padding-left: 35px;
 }
 
 .field {

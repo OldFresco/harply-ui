@@ -6,10 +6,10 @@ export class ConvoService {
 
     private userInputSource = new Subject<string>();
     public userSpoke$ = this.userInputSource.asObservable();
-    public defaultMessage: string
+    public defaultMessage: string;
 
     constructor() {
-        this.defaultMessage = "Hi! How can I help?";
+        this.defaultMessage = 'Hi! How can I help?';
     }
 
     announceUserSpoke(message: string) {

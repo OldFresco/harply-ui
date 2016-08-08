@@ -17,14 +17,14 @@ var ConvoAreaComponent = (function () {
         var _this = this;
         this.convoService = convoService;
         this.userHasSpoken = false;
-        this.userInput = 'You: ';
         this.botResponse = 'Harply: ' + this.convoService.defaultMessage;
+        this.userInputs = [];
         convoService.userSpoke$.subscribe(function (message) {
             _this.whenUserSpeaks(message);
         });
     }
     ConvoAreaComponent.prototype.whenUserSpeaks = function (message) {
-        this.userInput = 'You: ' + message;
+        this.userInputs.push('You: ' + message);
         this.userHasSpoken = true;
         console.log('event recieved');
     };

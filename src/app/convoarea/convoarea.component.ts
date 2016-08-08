@@ -16,12 +16,12 @@ export class ConvoAreaComponent {
 
     private userHasSpoken: boolean = false;
     public userInputStream: Observable<string>;
-    public userInput: string;
+    public userInputs: string[];
     public botResponse: string;
 
     constructor(private convoService: ConvoService) {
-        this.userInput = 'You: ';
         this.botResponse = 'Harply: ' + this.convoService.defaultMessage;
+        this.userInputs = [];
 
         convoService.userSpoke$.subscribe(
             message => {
@@ -30,7 +30,7 @@ export class ConvoAreaComponent {
     }
 
     private whenUserSpeaks(message: string): void {
-        this.userInput = 'You: ' + message;
+        this.userInputs.push('You: ' + message);
         this.userHasSpoken = true;
         console.log('event recieved');
     }

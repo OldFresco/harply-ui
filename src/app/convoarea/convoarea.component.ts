@@ -20,7 +20,7 @@ export class ConvoAreaComponent {
     public botResponse: string;
 
     constructor(private convoService: ConvoService) {
-        this.botResponse = 'Harply: ' + this.convoService.defaultMessage;
+        this.botResponse = this.convoService.defaultMessage;
         this.userInputs = [];
 
         convoService.userSpoke$.subscribe(
@@ -30,7 +30,7 @@ export class ConvoAreaComponent {
     }
 
     private whenUserSpeaks(message: string): void {
-        this.userInputs.push('You: ' + message);
+        this.userInputs.push(message);
         this.userHasSpoken = true;
         console.log('event recieved');
 

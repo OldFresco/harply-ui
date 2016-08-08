@@ -9,6 +9,20 @@ body {
     background-color: rgb(26, 188, 156);
 }
 
+.chat-prefix-bot {
+    font-size: inherit;
+    font-style: inherit;
+    font: inherit;
+    color: darksalmon;
+}
+
+.chat-prefix-user {
+    font-size: inherit;
+    font-style: inherit;
+    font: inherit;
+    color: cadetblue;
+}
+
 .convoinput {
     z-index: 500;
     position: fixed;
@@ -76,6 +90,7 @@ body {
     -webkit-margin-after: 0em;
     font-size: x-large;
     font-weight: bold;
+    color: darksalmon;
 }
 
 .user-bubble {

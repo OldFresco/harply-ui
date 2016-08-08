@@ -23,24 +23,11 @@ var ConvoAreaComponent = (function () {
             _this.whenUserSpeaks(message);
         });
     }
-    ConvoAreaComponent.prototype.ngOnInit = function () {
-        this.scrollToBottom();
-    };
     ConvoAreaComponent.prototype.whenUserSpeaks = function (message) {
         this.userInputs.push('You: ' + message);
         this.userHasSpoken = true;
         console.log('event recieved');
     };
-    ConvoAreaComponent.prototype.scrollToBottom = function () {
-        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    };
-    ConvoAreaComponent.prototype.catch = function (err) {
-        console.log(err);
-    };
-    __decorate([
-        core_1.ViewChild('scroll'), 
-        __metadata('design:type', core_1.ElementRef)
-    ], ConvoAreaComponent.prototype, "myScrollContainer", void 0);
     ConvoAreaComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

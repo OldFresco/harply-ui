@@ -12,10 +12,9 @@ import { Observable } from 'rxjs/Observable';
     directives: [BotChatComponent, UserChatComponent]
 })
 
-export class ConvoAreaComponent implements OnInit, AfterViewChecked {
+export class ConvoAreaComponent{
 
     private userHasSpoken: boolean = false;
-    @ViewChild('scroll') private myScrollContainer: ElementRef;
     public userInputStream: Observable<string>;
     public userInputs: string[];
     public botResponse: string;
@@ -30,19 +29,9 @@ export class ConvoAreaComponent implements OnInit, AfterViewChecked {
             });
     }
 
-    ngOnInit(){ 
-        this.scrollToBottom(); 
-    }
-
     private whenUserSpeaks(message: string): void {
         this.userInputs.push('You: ' + message);
         this.userHasSpoken = true;
         console.log('event recieved');
-    }
-
-    private scrollToBottom(): void {
-        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) {
-        console.log(err);
     }
 }

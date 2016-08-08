@@ -78,6 +78,7 @@ body {
     text-align: right;
     transition: 0.2s ease-in-out;
     float: right;
+    clear: both;
 }
 
 .user-bubble:hover {
@@ -91,6 +92,7 @@ body {
     background-color: darksalmon;
     transition: 0.2s ease-in-out;
     max-width: 480px;
+    display: inline-block;
 }
 
 .bot-bubble:hover {

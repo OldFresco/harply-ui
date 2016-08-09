@@ -24,7 +24,7 @@ export class ConvoService {
     // console.log('user spoke event from service' + message.content);
     this.http.get(this.botApiBaseUrl + this.apiKey + this.botID + '&message=' + message.content + this.externalID)
       .subscribe(response => {
-        var responseMessage = this.extractData(response);
+        let responseMessage = this.extractData(response);
         let botResponse = new ChatMessage();
         botResponse.content = responseMessage;
         botResponse.isBot = true;
@@ -36,7 +36,7 @@ export class ConvoService {
 
   announceNewBotMessage(message: ChatMessage) {
     this.botInputSource.next(message);
-    //console.log('bot spoke event from service ' + message.content);
+    // console.log('bot spoke event from service ' + message.content);
   }
 
   private extractData(response: Response) {

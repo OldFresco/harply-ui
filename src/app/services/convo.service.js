@@ -40,7 +40,7 @@ var ConvoService = (function () {
     };
     ConvoService.prototype.announceNewBotMessage = function (message) {
         this.botInputSource.next(message);
-        //console.log('bot spoke event from service ' + message.content);
+        // console.log('bot spoke event from service ' + message.content);
     };
     ConvoService.prototype.extractData = function (response) {
         console.log(response);

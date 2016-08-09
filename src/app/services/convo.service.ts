@@ -13,6 +13,6 @@ export class ConvoService {
 
     announceNewMessage(message: ChatMessage) {
     this.userInputSource.next(message);
-    console.log('user spoke event from service' + message.content);
+    //console.log('user spoke event from service' + message.content);
   }
 }

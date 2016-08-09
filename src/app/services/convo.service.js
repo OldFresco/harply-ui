@@ -17,7 +17,7 @@ var ConvoService = (function () {
     }
     ConvoService.prototype.announceNewMessage = function (message) {
         this.userInputSource.next(message);
-        console.log('user spoke event from service' + message.content);
+        //console.log('user spoke event from service' + message.content);
     };
     ConvoService = __decorate([
         core_1.Injectable(), 

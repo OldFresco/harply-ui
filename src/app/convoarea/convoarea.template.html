@@ -1,4 +1,4 @@
 <div class="container convoarea">
     <botchat [message]="defaultBotResponse"></botchat>
-    <userchat *ngFor="let message of messages" [message]="message"></userchat>
+    <dynamicchat *ngFor="let message of messages" [message]="message"></dynamicchat>
 </div>

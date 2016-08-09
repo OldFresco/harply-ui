@@ -9,20 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var BotChatComponent = (function () {
-    function BotChatComponent() {
-        this.isBot = true;
+var chatmessage_1 = require('../../models/chatmessage');
+var DynamicChatComponent = (function () {
+    function DynamicChatComponent() {
+        this.message = new chatmessage_1.ChatMessage();
+        this.isBot = false;
+        this.isBot = this.message.isBot;
+        console.log(this.isBot);
     }
-    BotChatComponent = __decorate([
+    __decorate([
+        core_1.Input('message'), 
+        __metadata('design:type', Object)
+    ], DynamicChatComponent.prototype, "message", void 0);
+    DynamicChatComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'botchat',
-            inputs: ['message'],
-            templateUrl: './botchat.template.html'
+            selector: 'dynamicchat',
+            templateUrl: './dynamicchat.template.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], BotChatComponent);
-    return BotChatComponent;
+    ], DynamicChatComponent);
+    return DynamicChatComponent;
 }());
-exports.BotChatComponent = BotChatComponent;
-//# sourceMappingURL=botchat.component.js.map
+exports.DynamicChatComponent = DynamicChatComponent;
+//# sourceMappingURL=dynamicchat.component..js.map

@@ -23,7 +23,7 @@ export class ConvoInputComponent {
   userSays(maininput: HTMLInputElement) {
     this.message.content = maininput.value;
     this.convoService.announceNewMessage(this.message);
-    console.log('Start: '+ this.message.content);
+    //console.log('Start: '+ this.message.content);
     maininput.value = null;
   }
 }

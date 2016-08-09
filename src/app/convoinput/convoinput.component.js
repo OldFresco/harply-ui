@@ -22,7 +22,7 @@ var ConvoInputComponent = (function () {
     ConvoInputComponent.prototype.userSays = function (maininput) {
         this.message.content = maininput.value;
         this.convoService.announceNewMessage(this.message);
-        console.log('Start: ' + this.message.content);
+        //console.log('Start: '+ this.message.content);
         maininput.value = null;
     };
     ConvoInputComponent = __decorate([

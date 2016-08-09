@@ -18,7 +18,7 @@ var ConvoAreaComponent = (function () {
     function ConvoAreaComponent(convoService) {
         var _this = this;
         this.convoService = convoService;
-        this.defaultBotResponse = "Hi! How can I help?";
+        this.defaultBotResponse = 'Hi! How can I help?';
         this.messages = [];
         convoService.userSpoke$.subscribe(function (message) {
             _this.whenSomeoneSpeaks(message);
@@ -30,8 +30,8 @@ var ConvoAreaComponent = (function () {
         chatMessageCopy.isBot = chatMessage.isBot;
         this.messages.push(chatMessageCopy);
         this.latestMessage = chatMessageCopy;
-        //console.log(this.messages);
-        //console.log('event recieved in convo area component' + this.latestMessage);
+        // console.log(this.messages);
+        // console.log('event recieved in convo area component' + this.latestMessage);
         $('html, body').animate({ scrollTop: $(document).height() }, 1000);
     };
     __decorate([

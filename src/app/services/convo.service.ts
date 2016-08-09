@@ -15,11 +15,11 @@ export class ConvoService {
 
   announceNewUserMessage(message: ChatMessage) {
     this.userInputSource.next(message);
-    //console.log('user spoke event from service' + message.content);
+    // console.log('user spoke event from service' + message.content);
   }
 
   announceNewBotMessage(message: ChatMessage) {
     this.botInputSource.next(message);
-    //console.log('user spoke event from service' + message.content);
+    // console.log('user spoke event from service' + message.content);
   }
 }

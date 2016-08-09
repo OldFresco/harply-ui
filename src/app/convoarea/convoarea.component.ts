@@ -15,7 +15,7 @@ import { DynamicChatComponent } from './chat/dynamicchat.component.';
 
 export class ConvoAreaComponent {
 
-    public defaultBotResponse: string = "Hi! How can I help?";
+    public defaultBotResponse: string = 'Hi! How can I help?';
     public messages: ChatMessage[];
     @Output() latestMessage: ChatMessage;
 
@@ -36,8 +36,8 @@ export class ConvoAreaComponent {
 
         this.messages.push(chatMessageCopy);
         this.latestMessage = chatMessageCopy;
-        //console.log(this.messages);
-        //console.log('event recieved in convo area component' + this.latestMessage);
+        // console.log(this.messages);
+        // console.log('event recieved in convo area component' + this.latestMessage);
 
         $('html, body').animate({ scrollTop: $(document).height() }, 1000);
     }

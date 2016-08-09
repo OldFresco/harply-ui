@@ -10,10 +10,8 @@ import { ChatMessage } from '../../models/chatmessage';
 export class UserChatComponent {
 
     @Input() message: ChatMessage;
-    public isBot: boolean = false; 
+    public isBot: boolean = false;
 
     constructor() {
     }
-
-    
 }

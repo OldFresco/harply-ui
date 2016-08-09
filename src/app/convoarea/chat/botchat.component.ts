@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 export class BotChatComponent {
 
     public message: string;
-    public isBot: boolean = true; 
+    public isBot: boolean = true;
 
     constructor() {
     }

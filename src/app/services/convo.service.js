@@ -23,12 +23,13 @@ var ConvoService = (function () {
         this.botID = '&chatBotID=63906';
         this.externalID = '&externalID=harplyApp';
         this.botApiBaseUrl = 'http://www.personalityforge.com/api/chat/?';
+        this.sessionID = Math.round((Math.random() * 1000) * 100);
     }
     ConvoService.prototype.announceNewUserMessage = function (message) {
         var _this = this;
         this.userInputSource.next(message);
         // console.log('user spoke event from service' + message.content);
-        this.http.get(this.botApiBaseUrl + this.apiKey + this.botID + '&message=' + message.content + this.externalID + Math.round((Math.random() * 10) * 10))
+        this.http.get(this.botApiBaseUrl + this.apiKey + this.botID + '&message=' + message.content + this.externalID + this.sessionID)
             .subscribe(function (response) {
             var responseMessage = _this.extractData(response);
             var botResponse = new chatmessage_1.ChatMessage();

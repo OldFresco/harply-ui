@@ -15,14 +15,16 @@ export class ConvoService {
   private botID = '&chatBotID=63906';
   private externalID = '&externalID=harplyApp';
   private botApiBaseUrl = 'http://www.personalityforge.com/api/chat/?';
+  private sessionID: number;
 
   constructor(private http: Http) {
+    this.sessionID = Math.round((Math.random() * 1000) * 100);
   }
 
   announceNewUserMessage(message: ChatMessage) {
     this.userInputSource.next(message);
     // console.log('user spoke event from service' + message.content);
-    this.http.get(this.botApiBaseUrl + this.apiKey + this.botID + '&message=' + message.content + this.externalID + Math.round((Math.random() * 10) * 10))
+    this.http.get(this.botApiBaseUrl + this.apiKey + this.botID + '&message=' + message.content + this.externalID + this.sessionID)
       .subscribe(response => {
         let responseMessage = this.extractData(response);
         let botResponse = new ChatMessage();

@@ -22,7 +22,7 @@ export class ConvoService {
   announceNewUserMessage(message: ChatMessage) {
     this.userInputSource.next(message);
     // console.log('user spoke event from service' + message.content);
-    this.http.get(this.botApiBaseUrl + this.apiKey + this.botID + '&message=' + message.content + this.externalID)
+    this.http.get(this.botApiBaseUrl + this.apiKey + this.botID + '&message=' + message.content + this.externalID + Math.round((Math.random() * 10) * 10))
       .subscribe(response => {
         let responseMessage = this.extractData(response);
         let botResponse = new ChatMessage();

@@ -23,6 +23,9 @@ var ConvoAreaComponent = (function () {
         convoService.userSpoke$.subscribe(function (message) {
             _this.whenSomeoneSpeaks(message);
         });
+        convoService.botSpoke$.subscribe(function (message) {
+            _this.whenSomeoneSpeaks(message);
+        });
     }
     ConvoAreaComponent.prototype.whenSomeoneSpeaks = function (chatMessage) {
         var chatMessageCopy = new chatmessage_1.ChatMessage();

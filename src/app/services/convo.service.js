@@ -10,24 +10,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var Subject_1 = require('rxjs/Subject');
+var chatmessage_1 = require('../models/chatmessage');
+var http_1 = require('@angular/http');
 var ConvoService = (function () {
-    function ConvoService() {
+    function ConvoService(http) {
+        this.http = http;
         this.userInputSource = new Subject_1.Subject();
         this.botInputSource = new Subject_1.Subject();
         this.userSpoke$ = this.userInputSource.asObservable();
         this.botSpoke$ = this.botInputSource.asObservable();
+        this.apiKey = 'apiKey=h9xVOTFuIPU8B8iw';
+        this.botID = '&chatBotID=63906';
+        this.externalID = '&externalID=harplyApp';
+        this.botApiBaseUrl = 'http://www.personalityforge.com/api/chat/?';
     }
     ConvoService.prototype.announceNewUserMessage = function (message) {
+        var _this = this;
         this.userInputSource.next(message);
         // console.log('user spoke event from service' + message.content);
+        this.http.get(this.botApiBaseUrl + this.apiKey + this.botID + '&message=' + message.content + this.externalID)
+            .subscribe(function (response) {
+            var responseMessage = _this.extractData(response);
+            var botResponse = new chatmessage_1.ChatMessage();
+            botResponse.content = responseMessage;
+            botResponse.isBot = true;
+            _this.announceNewBotMessage(botResponse);
+        });
+        console.log('this happened');
     };
     ConvoService.prototype.announceNewBotMessage = function (message) {
         this.botInputSource.next(message);
-        // console.log('user spoke event from service' + message.content);
+        //console.log('bot spoke event from service ' + message.content);
+    };
+    ConvoService.prototype.extractData = function (response) {
+        console.log(response);
+        var body = response.json();
+        // console.log('Message from bot: ' + body.message.message);
+        return body.message.message || { 'message': 'Sorry... say that again?' };
     };
     ConvoService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], ConvoService);
     return ConvoService;
 }());

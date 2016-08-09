@@ -31,7 +31,7 @@ export class ConvoService {
         this.announceNewBotMessage(botResponse);
       }
       );
-    console.log('this happened');
+    // console.log('this happened');
   }
 
   announceNewBotMessage(message: ChatMessage) {
@@ -40,7 +40,6 @@ export class ConvoService {
   }
 
   private extractData(response: Response) {
-    console.log(response);
     let body = response.json();
     // console.log('Message from bot: ' + body.message.message);
     return body.message.message || { 'message': 'Sorry... say that again?' };

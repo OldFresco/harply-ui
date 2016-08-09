@@ -1,5 +1,5 @@
 {
-    "name": "website-using-express",
+    "name": "Harply Bot Web App",
     "version": "0.0.1",
     "scripts": {
         "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",

@@ -13,10 +13,16 @@ var Subject_1 = require('rxjs/Subject');
 var ConvoService = (function () {
     function ConvoService() {
         this.userInputSource = new Subject_1.Subject();
+        this.botInputSource = new Subject_1.Subject();
         this.userSpoke$ = this.userInputSource.asObservable();
+        this.botSpoke$ = this.botInputSource.asObservable();
     }
-    ConvoService.prototype.announceNewMessage = function (message) {
+    ConvoService.prototype.announceNewUserMessage = function (message) {
         this.userInputSource.next(message);
+        //console.log('user spoke event from service' + message.content);
+    };
+    ConvoService.prototype.announceNewBotMessage = function (message) {
+        this.botInputSource.next(message);
         //console.log('user spoke event from service' + message.content);
     };
     ConvoService = __decorate([

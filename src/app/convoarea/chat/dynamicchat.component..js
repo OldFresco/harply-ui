@@ -14,9 +14,11 @@ var DynamicChatComponent = (function () {
     function DynamicChatComponent() {
         this.message = new chatmessage_1.ChatMessage();
         this.isBot = false;
+    }
+    DynamicChatComponent.prototype.ngOnInit = function () {
         this.isBot = this.message.isBot;
         console.log(this.isBot);
-    }
+    };
     __decorate([
         core_1.Input('message'), 
         __metadata('design:type', Object)

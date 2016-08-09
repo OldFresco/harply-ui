@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChatMessage } from '../../models/chatmessage';
 
 @Component({
@@ -7,13 +7,17 @@ import { ChatMessage } from '../../models/chatmessage';
     templateUrl: './dynamicchat.template.html'
 })
 
-export class DynamicChatComponent {
+export class DynamicChatComponent implements OnInit {
 
     @Input('message')
     public message = new ChatMessage();
     public isBot: boolean = false; 
 
     constructor() {
+    }
+
+    ngOnInit()
+    {
         this.isBot = this.message.isBot;
         console.log(this.isBot);
     }   

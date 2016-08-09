@@ -1,10 +1,12 @@
 {
     "name": "Harply Bot Web App",
     "version": "0.0.1",
+    "description": "Simple message style based chat bot web app",
+    "repository": "https://github.com/OldFresco/harply-ui",
     "scripts": {
         "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
         "lite": "lite-server",
-        "postinstall": "typings install",
+        //"postinstall": "typings install",
         "tsc": "tsc",
         "tsc:w": "tsc -w",
         "typings": "typings",

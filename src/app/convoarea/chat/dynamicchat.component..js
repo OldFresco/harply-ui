@@ -17,7 +17,6 @@ var DynamicChatComponent = (function () {
     }
     DynamicChatComponent.prototype.ngOnInit = function () {
         this.isBot = this.message.isBot;
-        // console.log(this.isBot);
     };
     __decorate([
         core_1.Input('message'), 

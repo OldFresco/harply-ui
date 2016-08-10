@@ -23,7 +23,6 @@ export class ConvoService {
 
   announceNewUserMessage(message: ChatMessage) {
     this.userInputSource.next(message);
-    // console.log('user spoke event from service' + message.content);
     this.http.get(this.botApiBaseUrl + this.apiKey + this.botID + '&message=' + message.content + this.externalID + this.sessionID)
       .subscribe(response => {
         let responseMessage = this.extractData(response);
@@ -33,17 +32,14 @@ export class ConvoService {
         this.announceNewBotMessage(botResponse);
       }
       );
-    // console.log('this happened');
   }
 
   announceNewBotMessage(message: ChatMessage) {
     this.botInputSource.next(message);
-    // console.log('bot spoke event from service ' + message.content);
   }
 
   private extractData(response: Response) {
     let body = response.json();
-    // console.log('Message from bot: ' + body.message.message);
     return body.message.message || { 'message': 'Sorry... say that again?' };
   }
 }

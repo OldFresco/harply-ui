@@ -28,7 +28,6 @@ var ConvoService = (function () {
     ConvoService.prototype.announceNewUserMessage = function (message) {
         var _this = this;
         this.userInputSource.next(message);
-        // console.log('user spoke event from service' + message.content);
         this.http.get(this.botApiBaseUrl + this.apiKey + this.botID + '&message=' + message.content + this.externalID + this.sessionID)
             .subscribe(function (response) {
             var responseMessage = _this.extractData(response);
@@ -37,15 +36,12 @@ var ConvoService = (function () {
             botResponse.isBot = true;
             _this.announceNewBotMessage(botResponse);
         });
-        // console.log('this happened');
     };
     ConvoService.prototype.announceNewBotMessage = function (message) {
         this.botInputSource.next(message);
-        // console.log('bot spoke event from service ' + message.content);
     };
     ConvoService.prototype.extractData = function (response) {
         var body = response.json();
-        // console.log('Message from bot: ' + body.message.message);
         return body.message.message || { 'message': 'Sorry... say that again?' };
     };
     ConvoService = __decorate([

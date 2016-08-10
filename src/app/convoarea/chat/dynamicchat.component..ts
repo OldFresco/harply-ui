@@ -18,6 +18,5 @@ export class DynamicChatComponent implements OnInit {
 
     ngOnInit() {
         this.isBot = this.message.isBot;
-        // console.log(this.isBot);
     }
 }

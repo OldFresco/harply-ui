@@ -33,8 +33,6 @@ var ConvoAreaComponent = (function () {
         chatMessageCopy.isBot = chatMessage.isBot;
         this.messages.push(chatMessageCopy);
         this.latestMessage = chatMessageCopy;
-        // console.log(this.messages);
-        // console.log('event recieved in convo area component' + this.latestMessage);
         $('html, body').animate({ scrollTop: $(document).height() }, 1000);
     };
     __decorate([

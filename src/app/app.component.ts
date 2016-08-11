@@ -10,4 +10,19 @@ import { ConvoAreaComponent } from './convoarea/convoarea.component';
   directives: [ConvoInputComponent, ConvoAreaComponent]
 })
 
-export class AppComponent { }
+export class AppComponent {
+
+  constructor() {
+    window.onscroll = () => {
+      console.log('fp');
+      $("convo-input").fadeTo(0.01, 0.5, function () {
+      });;
+    }
+
+    window.onkeydown = () => {
+      console.log('fp');
+      $("convo-input").fadeTo(0.1, 1.0, function () {
+      });;
+    }
+  }
+}

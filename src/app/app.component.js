@@ -13,6 +13,18 @@ var convoinput_component_1 = require('./convoinput/convoinput.component');
 var convoarea_component_1 = require('./convoarea/convoarea.component');
 var AppComponent = (function () {
     function AppComponent() {
+        window.onscroll = function () {
+            console.log('fp');
+            $("convo-input").fadeTo(0.01, 0.5, function () {
+            });
+            ;
+        };
+        window.onkeydown = function () {
+            console.log('fp');
+            $("convo-input").fadeTo(0.1, 1.0, function () {
+            });
+            ;
+        };
     }
     AppComponent = __decorate([
         core_1.Component({

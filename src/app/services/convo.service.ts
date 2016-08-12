@@ -56,7 +56,6 @@ export class ConvoService {
     })
 
     message = words.join(' ');
-    console.log(message);
     return message;
   }
 }

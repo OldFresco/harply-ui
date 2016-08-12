@@ -54,7 +54,6 @@ var ConvoService = (function () {
             }
         });
         message = words.join(' ');
-        console.log(message);
         return message;
     };
     ConvoService = __decorate([

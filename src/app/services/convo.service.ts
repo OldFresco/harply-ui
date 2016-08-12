@@ -27,7 +27,7 @@ export class ConvoService {
       .subscribe(response => {
         let responseMessage = this.extractData(response);
         let botResponse = new ChatMessage();
-        botResponse.content = responseMessage;
+        botResponse.content = this.convertName(responseMessage);
         botResponse.isBot = true;
         this.announceNewBotMessage(botResponse);
       }
@@ -41,5 +41,22 @@ export class ConvoService {
   private extractData(response: Response) {
     let body = response.json();
     return body.message.message || { 'message': 'Sorry... say that again?' };
+  }
+
+  private convertName(message: string) {
+    let convertedName = 'Harply';
+
+    let words = message.split(' ');
+
+    words.forEach((element) => {
+      if (element === 'CyberTy' || element === 'CyberTy.' || element === 'CyberTy?') {
+        var index = words.indexOf(element);
+        words[index] = convertedName;
+      }
+    })
+
+    message = words.join(' ');
+    console.log(message);
+    return message;
   }
 }

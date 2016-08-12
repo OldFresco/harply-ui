@@ -32,7 +32,7 @@ var ConvoService = (function () {
             .subscribe(function (response) {
             var responseMessage = _this.extractData(response);
             var botResponse = new chatmessage_1.ChatMessage();
-            botResponse.content = responseMessage;
+            botResponse.content = _this.convertName(responseMessage);
             botResponse.isBot = true;
             _this.announceNewBotMessage(botResponse);
         });
@@ -43,6 +43,19 @@ var ConvoService = (function () {
     ConvoService.prototype.extractData = function (response) {
         var body = response.json();
         return body.message.message || { 'message': 'Sorry... say that again?' };
+    };
+    ConvoService.prototype.convertName = function (message) {
+        var convertedName = 'Harply';
+        var words = message.split(' ');
+        words.forEach(function (element) {
+            if (element === 'CyberTy' || element === 'CyberTy.' || element === 'CyberTy?') {
+                var index = words.indexOf(element);
+                words[index] = convertedName;
+            }
+        });
+        message = words.join(' ');
+        console.log(message);
+        return message;
     };
     ConvoService = __decorate([
         core_1.Injectable(), 

@@ -50,10 +50,10 @@ export class ConvoService {
 
     words.forEach((element) => {
       if (element === 'CyberTy' || element === 'CyberTy.' || element === 'CyberTy?') {
-        var index = words.indexOf(element);
+        let index = words.indexOf(element);
         words[index] = convertedName;
       }
-    })
+    });
 
     message = words.join(' ');
     return message;

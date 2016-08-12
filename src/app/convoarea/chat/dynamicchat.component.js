@@ -33,4 +33,4 @@ var DynamicChatComponent = (function () {
     return DynamicChatComponent;
 }());
 exports.DynamicChatComponent = DynamicChatComponent;
-//# sourceMappingURL=dynamicchat.component..js.map
+//# sourceMappingURL=dynamicchat.component.js.map

@@ -4,7 +4,7 @@ import { ChatMessage } from '../models/chatmessage';
 import { Observable } from 'rxjs/Observable';
 import { BotChatComponent } from './chat/botchat.component';
 import { UserChatComponent } from './chat/userchat.component';
-import { DynamicChatComponent } from './chat/dynamicchat.component.';
+import { DynamicChatComponent } from './chat/dynamicchat.component';
 import { Http, Response } from '@angular/http';
 
 @Component({

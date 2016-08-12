@@ -13,7 +13,7 @@ var convo_service_1 = require('../services/convo.service');
 var chatmessage_1 = require('../models/chatmessage');
 var botchat_component_1 = require('./chat/botchat.component');
 var userchat_component_1 = require('./chat/userchat.component');
-var dynamicchat_component_1 = require('./chat/dynamicchat.component.');
+var dynamicchat_component_1 = require('./chat/dynamicchat.component');
 var ConvoAreaComponent = (function () {
     function ConvoAreaComponent(convoService) {
         var _this = this;

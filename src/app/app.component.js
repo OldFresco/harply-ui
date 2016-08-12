@@ -17,12 +17,12 @@ var router_1 = require('@angular/router');
 var AppComponent = (function () {
     function AppComponent() {
         window.onscroll = function () {
-            $("convo-input").fadeTo(0.01, 0.5, function () {
+            $('convo-input').fadeTo(0.01, 0.5, function () {
             });
             ;
         };
         window.onkeydown = function () {
-            $("convo-input").fadeTo(0.1, 1.0, function () {
+            $('convo-input').fadeTo(0.1, 1.0, function () {
             });
             ;
         };

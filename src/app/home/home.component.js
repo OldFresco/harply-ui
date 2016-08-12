@@ -14,16 +14,6 @@ var convoarea_component_1 = require('../convoarea/convoarea.component');
 var router_1 = require('@angular/router');
 var HomeComponent = (function () {
     function HomeComponent() {
-        window.onscroll = function () {
-            $("convo-input").fadeTo(0.01, 0.5, function () {
-            });
-            ;
-        };
-        window.onkeydown = function () {
-            $("convo-input").fadeTo(0.1, 1.0, function () {
-            });
-            ;
-        };
     }
     HomeComponent = __decorate([
         core_1.Component({

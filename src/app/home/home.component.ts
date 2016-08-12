@@ -12,16 +12,4 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 })
 
 export class HomeComponent {
-
-  constructor() {
-    window.onscroll = () => {
-      $("convo-input").fadeTo(0.01, 0.5, function () {
-      });;
-    }
-
-    window.onkeydown = () => {
-      $("convo-input").fadeTo(0.1, 1.0, function () {
-      });;
-    }
-  }
 }

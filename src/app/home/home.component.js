@@ -9,13 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var convoinput_component_1 = require('./convoinput/convoinput.component');
-var convoarea_component_1 = require('./convoarea/convoarea.component');
-var nocontent_component_1 = require('./errors/nocontent.component');
-var home_component_1 = require('./home/home.component');
+var convoinput_component_1 = require('../convoinput/convoinput.component');
+var convoarea_component_1 = require('../convoarea/convoarea.component');
 var router_1 = require('@angular/router');
-var AppComponent = (function () {
-    function AppComponent() {
+var HomeComponent = (function () {
+    function HomeComponent() {
         window.onscroll = function () {
             $("convo-input").fadeTo(0.01, 0.5, function () {
             });
@@ -27,17 +25,16 @@ var AppComponent = (function () {
             ;
         };
     }
-    AppComponent = __decorate([
+    HomeComponent = __decorate([
         core_1.Component({
             encapsulation: core_1.ViewEncapsulation.None,
-            selector: 'app',
-            template: "<div><router-outlet></router-outlet></div>",
-            directives: [convoinput_component_1.ConvoInputComponent, convoarea_component_1.ConvoAreaComponent, router_1.ROUTER_DIRECTIVES],
-            precompile: [home_component_1.HomeComponent, nocontent_component_1.NoContentComponent]
+            selector: 'home',
+            template: "<convo-input class=\"convoinput\"></convo-input>\n  <convoarea class=\"convoarea\"></convoarea>",
+            directives: [convoinput_component_1.ConvoInputComponent, convoarea_component_1.ConvoAreaComponent, router_1.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], HomeComponent);
+    return HomeComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.HomeComponent = HomeComponent;
+//# sourceMappingURL=home.component.js.map

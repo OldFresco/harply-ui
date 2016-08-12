@@ -2,7 +2,6 @@
 * {
     margin: 0;
     padding: 0;
-    font: 12pt Arial;
 }
 
 body {
@@ -75,6 +74,14 @@ body {
     padding: 1em;
     text-align: left;
     word-wrap: break-word;
+}
+
+.text-generic {
+    font: 1.2em 'Montserrat Alternates';
+    padding: 1em;
+    word-wrap: break-word;
+    color: papayawhip;
+    padding: 13%;
 }
 
 .talktext-bot p {

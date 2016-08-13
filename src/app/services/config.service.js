@@ -14,7 +14,8 @@ var Config = (function () {
         this.pf_externalID = '&externalID=harplyApp';
         this.pf_apiKey = 'apiKey=h9xVOTFuIPU8B8iw';
         this.pf_botID = '&chatBotID=63906';
-        this.pf_botApiBaseUrl = 'http://www.personalityforge.com/api/chat/?';
+        this.pf_botApiBaseUri = 'http://www.personalityforge.com/api/chat/?';
+        this.mockResponseUri = 'assets/mock-bot-response.json';
         this.currentEnv = window.location.hostname;
         this.chatSessionId = Math.round((Math.random() * 1000) * 100);
     }
@@ -25,22 +26,22 @@ var Config = (function () {
         switch (environment) {
             case 'localhost':
                 data = {
-                    mockBotResponseUri: 'assets/mock-bot-response.json',
-                    botBaseUri: 'assets/mock-bot-response.json',
+                    mockBotResponseUri: this.mockResponseUri,
+                    botBaseUri: this.mockResponseUri,
                     botExternalId: this.pf_externalID
                 };
                 break;
-            case 'harplybot.me':
+            case 'harplybot.azurewebsites.net':
                 data = {
-                    mockBotResponseUri: 'assets/mock-bot-response.json',
-                    botBaseUri: this.pf_botApiBaseUrl + this.pf_apiKey + this.pf_botID,
+                    mockBotResponseUri: this.mockResponseUri,
+                    botBaseUri: this.pf_botApiBaseUri + this.pf_apiKey + this.pf_botID,
                     botExternalId: this.pf_externalID
                 };
                 break;
             default:
                 data = {
-                    mockBotResponseUri: 'assets/mock-bot-response.json',
-                    botBaseUri: 'assets/mock-bot-response.json',
+                    mockBotResponseUri: this.mockResponseUri,
+                    botBaseUri: this.mockResponseUri,
                     botExternalId: this.pf_externalID
                 };
         }
@@ -51,19 +52,19 @@ var Config = (function () {
         var data = {};
         environment = this.currentEnv;
         switch (environment) {
-            case 'localhosta':
-                data = {
-                    botUri: 'assets/mock-bot-response.json'
-                };
-                break;
             case 'localhost':
                 data = {
-                    botUri: this.pf_botApiBaseUrl + this.pf_apiKey + this.pf_botID + '&message=' + message + this.pf_externalID + this.chatSessionId
+                    botUri: this.mockResponseUri,
+                };
+                break;
+            case 'harplybot.azurewebsites.net':
+                data = {
+                    botUri: this.pf_botApiBaseUri + this.pf_apiKey + this.pf_botID + '&message=' + message + this.pf_externalID + this.chatSessionId
                 };
                 break;
             default:
                 data = {
-                    botUri: 'assets/mock-bot-response.json'
+                    botUri: this.mockResponseUri,
                 };
         }
         return data['botUri'];

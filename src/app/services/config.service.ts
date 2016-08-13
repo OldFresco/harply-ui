@@ -69,12 +69,12 @@ export class Config {
                 break;
             case 'harplybot.me':
                 data = {
-                    botUri: this.mockResponseUri,
+                    botUri: this.pf_botApiBaseUri + this.pf_apiKey + this.pf_botID + '&message=' + message + this.pf_externalID + this.chatSessionId
                 };
                 break;
             case 'harplybot.azurewebsites.net':
                 data = {
-                    botUri: this.pf_botApiBaseUri + this.pf_apiKey + this.pf_botID + '&message=' + message + this.pf_externalID + this.chatSessionId
+                    botUri: this.mockResponseUri,
                 };
                 break;
 

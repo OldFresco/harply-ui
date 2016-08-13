@@ -32,6 +32,13 @@ export class Config {
             case 'harplybot.azurewebsites.net':
                 data = {
                     mockBotResponseUri: this.mockResponseUri,
+                    botBaseUri: this.mockResponseUri,
+                    botExternalId: this.pf_externalID
+                };
+                break;
+            case 'harplybot.me':
+                data = {
+                    mockBotResponseUri: this.mockResponseUri,
                     botBaseUri: this.pf_botApiBaseUri + this.pf_apiKey + this.pf_botID,
                     botExternalId: this.pf_externalID
                 };
@@ -56,6 +63,11 @@ export class Config {
 
         switch (environment) {
             case 'localhost':
+                data = {
+                    botUri: this.mockResponseUri,
+                };
+                break;
+            case 'harplybot.me':
                 data = {
                     botUri: this.mockResponseUri,
                 };

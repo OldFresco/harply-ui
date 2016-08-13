@@ -11,9 +11,10 @@ export class ConvoService {
   private userInputSource = new Subject<ChatMessage>();
   private botInputSource = new Subject<ChatMessage>();
   private botResponseEndpoint: string;
+  private errorMessage: string;
   public userSpoke$ = this.userInputSource.asObservable();
   public botSpoke$ = this.botInputSource.asObservable();
-  
+
   constructor(private http: Http, private config: Config) {
   }
 
@@ -21,12 +22,22 @@ export class ConvoService {
     this.userInputSource.next(message);
 
     this.http.get(this.config.getBotResponseEndpoint(message))
-      .subscribe(response => {
+      .subscribe(
+      (response) => {
         this.handleResponse(response);
+      },
+      (errorMessage) => {
+        this.errorMessage = errorMessage;
+        console.log(this.errorMessage);
+        this.announceNewBotMessage(this.returnErrorBotResponse());
       });
   }
 
-  handleResponse(response) {
+  announceNewBotMessage(message: ChatMessage) {
+    this.botInputSource.next(message);
+  }
+
+  private handleResponse(response) {
     let responseMessage = this.extractData(response);
     let botResponse = new ChatMessage();
     botResponse.content = this.convertName(responseMessage);
@@ -34,8 +45,12 @@ export class ConvoService {
     this.announceNewBotMessage(botResponse);
   }
 
-  announceNewBotMessage(message: ChatMessage) {
-    this.botInputSource.next(message);
+  private returnErrorBotResponse(): ChatMessage {
+    let botResponse = new ChatMessage();
+    botResponse.content = 'Erm... Sorry but didn\'t quite catch that for whatever reason. :(';
+    botResponse.isBot = true;
+
+    return botResponse;
   }
 
   private extractData(response: Response) {

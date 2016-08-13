@@ -28,7 +28,14 @@ var ConvoService = (function () {
         this.http.get(this.config.getBotResponseEndpoint(message))
             .subscribe(function (response) {
             _this.handleResponse(response);
+        }, function (errorMessage) {
+            _this.errorMessage = errorMessage;
+            console.log(_this.errorMessage);
+            _this.announceNewBotMessage(_this.returnErrorBotResponse());
         });
+    };
+    ConvoService.prototype.announceNewBotMessage = function (message) {
+        this.botInputSource.next(message);
     };
     ConvoService.prototype.handleResponse = function (response) {
         var responseMessage = this.extractData(response);
@@ -37,8 +44,11 @@ var ConvoService = (function () {
         botResponse.isBot = true;
         this.announceNewBotMessage(botResponse);
     };
-    ConvoService.prototype.announceNewBotMessage = function (message) {
-        this.botInputSource.next(message);
+    ConvoService.prototype.returnErrorBotResponse = function () {
+        var botResponse = new chatmessage_1.ChatMessage();
+        botResponse.content = 'Erm... Sorry but didn\'t quite catch that for whatever reason. :(';
+        botResponse.isBot = true;
+        return botResponse;
     };
     ConvoService.prototype.extractData = function (response) {
         var body = response.json();

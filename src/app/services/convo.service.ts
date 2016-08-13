@@ -21,7 +21,7 @@ export class ConvoService {
   announceNewUserMessage(message: ChatMessage) {
     this.userInputSource.next(message);
 
-    this.http.get(this.config.getBotResponseEndpoint(message))
+    this.http.get(this.config.getBotResponseEndpoint(message.content))
       .subscribe(
       (response) => {
         this.handleResponse(response);

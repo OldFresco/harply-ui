@@ -25,7 +25,7 @@ var ConvoService = (function () {
     ConvoService.prototype.announceNewUserMessage = function (message) {
         var _this = this;
         this.userInputSource.next(message);
-        this.http.get(this.config.getBotResponseEndpoint(message))
+        this.http.get(this.config.getBotResponseEndpoint(message.content))
             .subscribe(function (response) {
             _this.handleResponse(response);
         }, function (errorMessage) {

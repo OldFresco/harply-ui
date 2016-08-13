@@ -18,12 +18,12 @@ export class AppComponent {
   constructor() {
     window.onscroll = () => {
       $('convo-input').fadeTo(0.01, 0.5, function () {
-      });;
-    }
+      }); ;
+    };
 
     window.onkeydown = () => {
       $('convo-input').fadeTo(0.1, 1.0, function () {
-      });;
-    }
+      }); ;
+    };
   }
 }

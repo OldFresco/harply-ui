@@ -11,7 +11,10 @@
         "tsc:w": "tsc -w",
         "typings": "typings",
         "tslint": "tslint",
-        "lint": "npm run tslint \"src/**/*.ts\""
+        "lint": "npm run tslint \"src/**/*.ts\"",
+        "test": "karma start karma.conf.js",
+        "coverage": "http-server -c-1 -o -p 9875 ./coverage",
+        "ci": "npm run lint && npm test"
     },
     "dependencies": {
         "@angular/common": "2.0.0-rc.4",
@@ -35,6 +38,12 @@
     },
     "devDependencies": {
         "concurrently": "^2.0.0",
+        "http-server": "^0.9.0",
+        "jasmine-core": "^2.4.1",
+        "karma": "^1.2.0",
+        "karma-chrome-launcher": "^1.0.1",
+        "karma-coverage": "^1.1.1",
+        "karma-jasmine": "^1.0.2",
         "lite-server": "^2.2.0",
         "tslint": "^3.14.0",
         "typescript": "^1.8.10",

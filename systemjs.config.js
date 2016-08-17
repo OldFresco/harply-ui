@@ -4,6 +4,7 @@
  */
 (function(global) {
     // map tells the System loader where to look for things
+    console.log('asda');
     var map = {
         'app': 'src/app', // 'dist',
         '@angular': 'node_modules/@angular',

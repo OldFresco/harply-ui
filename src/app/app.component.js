@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var convoinput_component_1 = require('./convoinput/convoinput.component');
 var convoarea_component_1 = require('./convoarea/convoarea.component');
-var nocontent_component_1 = require('./errors/nocontent.component');
-var home_component_1 = require('./home/home.component');
 var router_1 = require('@angular/router');
 var AppComponent = (function () {
     function AppComponent() {
@@ -32,8 +30,7 @@ var AppComponent = (function () {
             encapsulation: core_1.ViewEncapsulation.None,
             selector: 'app',
             template: "<div><router-outlet></router-outlet></div>",
-            directives: [convoinput_component_1.ConvoInputComponent, convoarea_component_1.ConvoAreaComponent, router_1.ROUTER_DIRECTIVES],
-            precompile: [home_component_1.HomeComponent, nocontent_component_1.NoContentComponent]
+            directives: [convoinput_component_1.ConvoInputComponent, convoarea_component_1.ConvoAreaComponent, router_1.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

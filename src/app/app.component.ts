@@ -9,8 +9,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
   selector: 'app',
   template: `<div><router-outlet></router-outlet></div>`,
-  directives: [ConvoInputComponent, ConvoAreaComponent, ROUTER_DIRECTIVES],
-  precompile: [HomeComponent, NoContentComponent]
+  directives: [ConvoInputComponent, ConvoAreaComponent, ROUTER_DIRECTIVES]
 })
 
 export class AppComponent {

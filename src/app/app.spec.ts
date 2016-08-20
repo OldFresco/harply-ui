@@ -9,9 +9,20 @@ import {
     provide
 } from '@angular/core';
 
-describe('toBeTruthy', function() {
-    it('passes if subject is true', function() {
+import { AppComponent } from './app.component';
+
+describe('toBeTruthy', function () {
+    it('passes if subject is true', function () {
         expect(true).toBeTruthy();
         expect(false).not.toBeTruthy();
     });
 })
+
+it('should make our app Component',
+    async(inject([TestComponentBuilder], (tcb) => {
+        return tcb
+            .createAsync(AppComponent)
+            .then((fixture) => {
+                fixture.AppName = '';
+            });
+    })));

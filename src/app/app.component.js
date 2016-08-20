@@ -14,6 +14,7 @@ var convoarea_component_1 = require('./convoarea/convoarea.component');
 var router_1 = require('@angular/router');
 var AppComponent = (function () {
     function AppComponent() {
+        this.AppName = 'Harply Bot Web App';
         window.onscroll = function () {
             $('convo-input').fadeTo(0.01, 0.5, function () {
             });

@@ -14,7 +14,10 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 export class AppComponent {
 
+  public AppName: string;
+
   constructor() {
+    this.AppName = 'Harply Bot Web App';
     window.onscroll = () => {
       $('convo-input').fadeTo(0.01, 0.5, function () {
       }); ;

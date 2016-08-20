@@ -17,11 +17,19 @@ System.config({
     map: {
         '@angular': 'node_modules/@angular',
         'rxjs': 'node_modules/rxjs',
-        'app': 'app'
+        'app': 'src/app'
     },
     packages: {
         'app': {
             main: 'main.js',
+            defaultExtension: 'js'
+        },
+        '@angular/http': {
+            main: 'index.js',
+            defaultExtension: 'js'
+        },
+        '@angular/router': {
+            main: 'index.js',
             defaultExtension: 'js'
         },
         '@angular/core': {

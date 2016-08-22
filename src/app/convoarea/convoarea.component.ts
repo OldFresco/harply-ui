@@ -39,6 +39,8 @@ export class ConvoAreaComponent {
 
         chatMessageCopy.content = chatMessage.content;
         chatMessageCopy.isBot = chatMessage.isBot;
+        chatMessageCopy.hasImg = chatMessage.hasImg;
+        chatMessageCopy.imgLink = chatMessage.imgLink;
 
         this.messages.push(chatMessageCopy);
         this.latestMessage = chatMessageCopy;

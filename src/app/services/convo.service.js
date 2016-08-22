@@ -13,10 +13,12 @@ var Subject_1 = require('rxjs/Subject');
 var chatmessage_1 = require('../models/chatmessage');
 var http_1 = require('@angular/http');
 var config_service_1 = require('./config.service');
+var harply_1 = require('../bot-brain/harply');
 var ConvoService = (function () {
-    function ConvoService(http, config) {
+    function ConvoService(http, config, harply) {
         this.http = http;
         this.config = config;
+        this.harply = harply;
         this.userInputSource = new Subject_1.Subject();
         this.botInputSource = new Subject_1.Subject();
         this.userSpoke$ = this.userInputSource.asObservable();
@@ -25,14 +27,20 @@ var ConvoService = (function () {
     ConvoService.prototype.announceNewUserMessage = function (message) {
         var _this = this;
         this.userInputSource.next(message);
-        this.http.get(this.config.getBotResponseEndpoint(message.content))
-            .subscribe(function (response) {
-            _this.handleResponse(response);
-        }, function (errorMessage) {
-            _this.errorMessage = errorMessage;
-            console.log(_this.errorMessage);
-            _this.announceNewBotMessage(_this.returnErrorBotResponse());
-        });
+        var thought = this.harply.thinkBasedOn(message.content);
+        if (thought != null) {
+            this.announceNewBotMessage(thought);
+        }
+        else {
+            this.http.get(this.config.getBotResponseEndpoint(message.content))
+                .subscribe(function (response) {
+                _this.handleResponse(response);
+            }, function (errorMessage) {
+                _this.errorMessage = errorMessage;
+                console.log(_this.errorMessage);
+                _this.announceNewBotMessage(_this.returnErrorBotResponse());
+            });
+        }
     };
     ConvoService.prototype.announceNewBotMessage = function (message) {
         this.botInputSource.next(message);
@@ -42,6 +50,7 @@ var ConvoService = (function () {
         var botResponse = new chatmessage_1.ChatMessage();
         botResponse.content = this.convertName(responseMessage);
         botResponse.isBot = true;
+        botResponse.hasImg = false;
         this.announceNewBotMessage(botResponse);
     };
     ConvoService.prototype.returnErrorBotResponse = function () {
@@ -68,7 +77,7 @@ var ConvoService = (function () {
     };
     ConvoService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, config_service_1.Config])
+        __metadata('design:paramtypes', [http_1.Http, config_service_1.Config, harply_1.Harply])
     ], ConvoService);
     return ConvoService;
 }());

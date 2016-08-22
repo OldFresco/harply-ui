@@ -14,9 +14,13 @@ var DynamicChatComponent = (function () {
     function DynamicChatComponent() {
         this.message = new chatmessage_1.ChatMessage();
         this.isBot = false;
+        this.hasImg = false;
     }
     DynamicChatComponent.prototype.ngOnInit = function () {
         this.isBot = this.message.isBot;
+        if (this.message.hasImg === true) {
+            this.hasImg = true;
+        }
     };
     __decorate([
         core_1.Input('message'), 

@@ -31,6 +31,8 @@ var ConvoAreaComponent = (function () {
         var chatMessageCopy = new chatmessage_1.ChatMessage();
         chatMessageCopy.content = chatMessage.content;
         chatMessageCopy.isBot = chatMessage.isBot;
+        chatMessageCopy.hasImg = chatMessage.hasImg;
+        chatMessageCopy.imgLink = chatMessage.imgLink;
         this.messages.push(chatMessageCopy);
         this.latestMessage = chatMessageCopy;
         $('html, body').animate({ scrollTop: $(document).height() }, 1000);

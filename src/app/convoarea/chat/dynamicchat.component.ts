@@ -12,11 +12,15 @@ export class DynamicChatComponent implements OnInit {
     @Input('message')
     public message = new ChatMessage();
     public isBot: boolean = false;
+    public hasImg: boolean = false;
 
     constructor() {
     }
 
     ngOnInit() {
         this.isBot = this.message.isBot;
+        if (this.message.hasImg === true){
+            this.hasImg = true;
+        }
     }
 }

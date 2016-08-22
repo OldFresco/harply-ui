@@ -9,6 +9,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { APP_ROUTER_PROVIDERS } from './app.routes';
 import { Config } from '../app/services/config.service';
 import { ConvoService } from './services/convo.service';
+import { Harply } from './bot-brain/harply';
 import {
   PlatformLocation,
   Location,
@@ -30,6 +31,7 @@ from '@angular/common';
   ],
   providers: [
     Config,
+    Harply,
     ConvoService,
     APP_ROUTER_PROVIDERS,
     HTTP_PROVIDERS,

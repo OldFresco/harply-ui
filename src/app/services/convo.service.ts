@@ -3,74 +3,82 @@ import { Subject }    from 'rxjs/Subject';
 import { ChatMessage } from '../models/chatmessage';
 import { Http, Response } from '@angular/http';
 import { Config } from './config.service';
-
+import { Harply } from '../bot-brain/harply';
 
 @Injectable()
 export class ConvoService {
 
-  private userInputSource = new Subject<ChatMessage>();
-  private botInputSource = new Subject<ChatMessage>();
-  private botResponseEndpoint: string;
-  private errorMessage: string;
-  public userSpoke$ = this.userInputSource.asObservable();
-  public botSpoke$ = this.botInputSource.asObservable();
+    private userInputSource = new Subject<ChatMessage>();
+    private botInputSource = new Subject<ChatMessage>();
+    private botResponseEndpoint: string;
+    private errorMessage: string;
+    public userSpoke$ = this.userInputSource.asObservable();
+    public botSpoke$ = this.botInputSource.asObservable();
 
-  constructor(private http: Http, private config: Config) {
-  }
+    constructor(private http: Http, private config: Config, private harply: Harply) {
+    }
 
-  announceNewUserMessage(message: ChatMessage) {
-    this.userInputSource.next(message);
+    announceNewUserMessage(message: ChatMessage) {
+        this.userInputSource.next(message);
 
-    this.http.get(this.config.getBotResponseEndpoint(message.content))
-      .subscribe(
-      (response) => {
-        this.handleResponse(response);
-      },
-      (errorMessage) => {
-        this.errorMessage = errorMessage;
-        console.log(this.errorMessage);
-        this.announceNewBotMessage(this.returnErrorBotResponse());
-      });
-  }
+        let thought = this.harply.thinkBasedOn(message.content);
 
-  announceNewBotMessage(message: ChatMessage) {
-    this.botInputSource.next(message);
-  }
+        if (thought != null) {
+            this.announceNewBotMessage(thought);
+        }
+        else {
+            this.http.get(this.config.getBotResponseEndpoint(message.content))
+                .subscribe(
+                (response) => {
+                    this.handleResponse(response);
+                },
+                (errorMessage) => {
+                    this.errorMessage = errorMessage;
+                    console.log(this.errorMessage);
+                    this.announceNewBotMessage(this.returnErrorBotResponse());
+                });
+        }
+    }
 
-  private handleResponse(response) {
-    let responseMessage = this.extractData(response);
-    let botResponse = new ChatMessage();
-    botResponse.content = this.convertName(responseMessage);
-    botResponse.isBot = true;
-    this.announceNewBotMessage(botResponse);
-  }
+    announceNewBotMessage(message: ChatMessage) {
+        this.botInputSource.next(message);
+    }
 
-  private returnErrorBotResponse(): ChatMessage {
-    let botResponse = new ChatMessage();
-    botResponse.content = 'Erm... Sorry but didn\'t quite catch that for whatever reason. :(';
-    botResponse.isBot = true;
+    private handleResponse(response) {
+        let responseMessage = this.extractData(response);
+        let botResponse = new ChatMessage();
+        botResponse.content = this.convertName(responseMessage);
+        botResponse.isBot = true;
+        botResponse.hasImg = false;
+        this.announceNewBotMessage(botResponse);
+    }
 
-    return botResponse;
-  }
+    private returnErrorBotResponse(): ChatMessage {
+        let botResponse = new ChatMessage();
+        botResponse.content = 'Erm... Sorry but didn\'t quite catch that for whatever reason. :(';
+        botResponse.isBot = true;
 
-  private extractData(response: Response) {
-    let body = response.json();
-    return body.message.message || { 'message': 'Sorry... say that again?' };
-  }
+        return botResponse;
+    }
 
-  private convertName(message: string) {
-    let convertedName = 'Harply';
+    private extractData(response: Response) {
+        let body = response.json();
+        return body.message.message || { 'message': 'Sorry... say that again?' };
+    }
 
-    let words = message.split(' ');
+    private convertName(message: string) {
+        let convertedName = 'Harply';
 
-    words.forEach((element) => {
-      if (element === 'CyberTy' || element === 'CyberTy.' || element === 'CyberTy?') {
-        let index = words.indexOf(element);
-        words[index] = convertedName;
-      }
-    });
+        let words = message.split(' ');
 
-    message = words.join(' ');
-    return message;
-  }
+        words.forEach((element) => {
+            if (element === 'CyberTy' || element === 'CyberTy.' || element === 'CyberTy?') {
+                let index = words.indexOf(element);
+                words[index] = convertedName;
+            }
+        });
+
+        message = words.join(' ');
+        return message;
+    }
 }

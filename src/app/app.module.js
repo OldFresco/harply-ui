@@ -18,6 +18,7 @@ var http_1 = require('@angular/http');
 var app_routes_1 = require('./app.routes');
 var config_service_1 = require('../app/services/config.service');
 var convo_service_1 = require('./services/convo.service');
+var harply_1 = require('./bot-brain/harply');
 var common_1 = require('@angular/common');
 var AppModule = (function () {
     function AppModule() {
@@ -35,6 +36,7 @@ var AppModule = (function () {
             ],
             providers: [
                 config_service_1.Config,
+                harply_1.Harply,
                 convo_service_1.ConvoService,
                 app_routes_1.APP_ROUTER_PROVIDERS,
                 http_1.HTTP_PROVIDERS,

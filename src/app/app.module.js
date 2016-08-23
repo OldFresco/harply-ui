@@ -36,8 +36,8 @@ var AppModule = (function () {
             ],
             providers: [
                 config_service_1.Config,
-                harply_1.Harply,
                 convo_service_1.ConvoService,
+                harply_1.Harply,
                 app_routes_1.APP_ROUTER_PROVIDERS,
                 http_1.HTTP_PROVIDERS,
                 { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy }

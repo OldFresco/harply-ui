@@ -31,8 +31,8 @@ from '@angular/common';
   ],
   providers: [
     Config,
-    Harply,
     ConvoService,
+    Harply,
     APP_ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
     {provide: LocationStrategy, useClass: HashLocationStrategy}

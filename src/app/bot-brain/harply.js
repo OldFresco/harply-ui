@@ -10,27 +10,67 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var chatmessage_1 = require('../models/chatmessage');
+var http_1 = require('@angular/http');
+var config_service_1 = require('../services/config.service');
+var convo_service_1 = require('../services/convo.service');
 var Harply = (function () {
-    function Harply() {
+    function Harply(http, config, convoService) {
+        var _this = this;
+        this.http = http;
+        this.config = config;
+        this.convoService = convoService;
+        convoService.userSpoke$.subscribe(function (userMessage) {
+            _this.http.get(_this.config.getBotResponseEndpoint(userMessage.content))
+                .subscribe(function (response) {
+                _this.handleResponse(response);
+            });
+        }, function (errorMessage) {
+            _this.errorMessage = errorMessage;
+            console.log(_this.errorMessage);
+            _this.convoService.announceNewBotMessage(_this.returnErrorBotResponse());
+        });
     }
-    Harply.prototype.thinkBasedOn = function (inputMessage) {
-        if (inputMessage === 'meme-me') {
-            var thought = this.getMeme();
-            return thought;
-        }
-        return null;
-    };
     Harply.prototype.getMeme = function () {
         var botResponse = new chatmessage_1.ChatMessage();
         botResponse.isBot = true;
         botResponse.hasImg = true;
-        botResponse.content = 'meme:';
+        botResponse.content = '';
         botResponse.imgLink = 'mockimg.jpg';
         return botResponse;
     };
+    Harply.prototype.handleResponse = function (response) {
+        var responseMessage = this.extractData(response);
+        var botResponse = new chatmessage_1.ChatMessage();
+        botResponse.content = this.convertName(responseMessage);
+        botResponse.isBot = true;
+        botResponse.hasImg = false;
+        this.convoService.announceNewBotMessage(botResponse);
+    };
+    Harply.prototype.returnErrorBotResponse = function () {
+        var botResponse = new chatmessage_1.ChatMessage();
+        botResponse.content = 'Erm... Sorry but didn\'t quite catch that for whatever reason. :(';
+        botResponse.isBot = true;
+        return botResponse;
+    };
+    Harply.prototype.extractData = function (response) {
+        var body = response.json();
+        return body.message.message || { 'message': 'Sorry... say that again?' };
+    };
+    Harply.prototype.convertName = function (message) {
+        var convertedName = 'Harply';
+        var words = message.split(' ');
+        words.forEach(function (element) {
+            if (element === 'CyberTy' || element === 'CyberTy.' || element === 'CyberTy?') {
+                var index = words.indexOf(element);
+                words[index] = convertedName;
+            }
+        });
+        message = words.join(' ');
+        return message;
+    };
     Harply = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http, config_service_1.Config, convo_service_1.ConvoService])
     ], Harply);
     return Harply;
 }());

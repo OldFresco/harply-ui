@@ -1,5 +1,6 @@
 import { Component, Output } from '@angular/core';
 import { ConvoService } from '../services/convo.service';
+import { Harply } from '../bot-brain/harply';
 import { ChatMessage } from '../models/chatmessage';
 import { Observable } from 'rxjs/Observable';
 import { BotChatComponent } from './chat/botchat.component';
@@ -20,7 +21,7 @@ export class ConvoAreaComponent {
     public messages: ChatMessage[];
     @Output() latestMessage: ChatMessage;
 
-    constructor(private convoService: ConvoService) {
+    constructor(private convoService: ConvoService, private harply: Harply) {
         this.messages = [];
 
         convoService.userSpoke$.subscribe(

@@ -10,74 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var Subject_1 = require('rxjs/Subject');
-var chatmessage_1 = require('../models/chatmessage');
-var http_1 = require('@angular/http');
-var config_service_1 = require('./config.service');
-var harply_1 = require('../bot-brain/harply');
 var ConvoService = (function () {
-    function ConvoService(http, config, harply) {
-        this.http = http;
-        this.config = config;
-        this.harply = harply;
+    function ConvoService() {
         this.userInputSource = new Subject_1.Subject();
         this.botInputSource = new Subject_1.Subject();
         this.userSpoke$ = this.userInputSource.asObservable();
         this.botSpoke$ = this.botInputSource.asObservable();
     }
     ConvoService.prototype.announceNewUserMessage = function (message) {
-        var _this = this;
         this.userInputSource.next(message);
-        var thought = this.harply.thinkBasedOn(message.content);
-        if (thought != null) {
-            this.announceNewBotMessage(thought);
-        }
-        else {
-            this.http.get(this.config.getBotResponseEndpoint(message.content))
-                .subscribe(function (response) {
-                _this.handleResponse(response);
-            }, function (errorMessage) {
-                _this.errorMessage = errorMessage;
-                console.log(_this.errorMessage);
-                _this.announceNewBotMessage(_this.returnErrorBotResponse());
-            });
-        }
     };
     ConvoService.prototype.announceNewBotMessage = function (message) {
         this.botInputSource.next(message);
     };
-    ConvoService.prototype.handleResponse = function (response) {
-        var responseMessage = this.extractData(response);
-        var botResponse = new chatmessage_1.ChatMessage();
-        botResponse.content = this.convertName(responseMessage);
-        botResponse.isBot = true;
-        botResponse.hasImg = false;
-        this.announceNewBotMessage(botResponse);
-    };
-    ConvoService.prototype.returnErrorBotResponse = function () {
-        var botResponse = new chatmessage_1.ChatMessage();
-        botResponse.content = 'Erm... Sorry but didn\'t quite catch that for whatever reason. :(';
-        botResponse.isBot = true;
-        return botResponse;
-    };
-    ConvoService.prototype.extractData = function (response) {
-        var body = response.json();
-        return body.message.message || { 'message': 'Sorry... say that again?' };
-    };
-    ConvoService.prototype.convertName = function (message) {
-        var convertedName = 'Harply';
-        var words = message.split(' ');
-        words.forEach(function (element) {
-            if (element === 'CyberTy' || element === 'CyberTy.' || element === 'CyberTy?') {
-                var index = words.indexOf(element);
-                words[index] = convertedName;
-            }
-        });
-        message = words.join(' ');
-        return message;
-    };
     ConvoService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, config_service_1.Config, harply_1.Harply])
+        __metadata('design:paramtypes', [])
     ], ConvoService);
     return ConvoService;
 }());

@@ -10,14 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var convo_service_1 = require('../services/convo.service');
+var harply_1 = require('../bot-brain/harply');
 var chatmessage_1 = require('../models/chatmessage');
 var botchat_component_1 = require('./chat/botchat.component');
 var userchat_component_1 = require('./chat/userchat.component');
 var dynamicchat_component_1 = require('./chat/dynamicchat.component');
 var ConvoAreaComponent = (function () {
-    function ConvoAreaComponent(convoService) {
+    function ConvoAreaComponent(convoService, harply) {
         var _this = this;
         this.convoService = convoService;
+        this.harply = harply;
         this.defaultBotResponse = 'Hi! How can I help?';
         this.messages = [];
         convoService.userSpoke$.subscribe(function (message) {
@@ -48,7 +50,7 @@ var ConvoAreaComponent = (function () {
             templateUrl: './convoarea.template.html',
             directives: [botchat_component_1.BotChatComponent, userchat_component_1.UserChatComponent, dynamicchat_component_1.DynamicChatComponent]
         }), 
-        __metadata('design:paramtypes', [convo_service_1.ConvoService])
+        __metadata('design:paramtypes', [convo_service_1.ConvoService, harply_1.Harply])
     ], ConvoAreaComponent);
     return ConvoAreaComponent;
 }());

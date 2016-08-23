@@ -20,14 +20,14 @@ var Harply = (function () {
         this.config = config;
         this.convoService = convoService;
         convoService.userSpoke$.subscribe(function (userMessage) {
-            _this.http.get(_this.config.getBotResponseEndpoint(userMessage.content))
+            _this.http.get(_this.config.getBotResponseEndpoint(userMessage.content) + 'd')
                 .subscribe(function (response) {
                 _this.handleResponse(response);
+            }, function (errorMessage) {
+                _this.errorMessage = errorMessage;
+                console.log(_this.errorMessage);
+                _this.convoService.announceNewBotMessage(_this.returnErrorBotResponse());
             });
-        }, function (errorMessage) {
-            _this.errorMessage = errorMessage;
-            console.log(_this.errorMessage);
-            _this.convoService.announceNewBotMessage(_this.returnErrorBotResponse());
         });
     }
     Harply.prototype.getMeme = function () {

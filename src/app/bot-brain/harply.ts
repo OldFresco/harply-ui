@@ -13,16 +13,15 @@ export class Harply {
     constructor(private http: Http, private config: Config, private convoService: ConvoService) {
         convoService.userSpoke$.subscribe(
             (userMessage) => {
-                this.http.get(this.config.getBotResponseEndpoint(userMessage.content))
+                this.http.get(this.config.getBotResponseEndpoint(userMessage.content)+'d')
                     .subscribe(
                     (response) => {
                         this.handleResponse(response);
+                    }, (errorMessage) => {
+                        this.errorMessage = errorMessage;
+                        console.log(this.errorMessage);
+                        this.convoService.announceNewBotMessage(this.returnErrorBotResponse());
                     });
-            },
-            (errorMessage) => {
-                this.errorMessage = errorMessage;
-                console.log(this.errorMessage);
-                this.convoService.announceNewBotMessage(this.returnErrorBotResponse());
             });
     }
 

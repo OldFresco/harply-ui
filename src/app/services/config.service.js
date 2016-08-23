@@ -54,7 +54,7 @@ var Config = (function () {
         }
         return data[value];
     };
-    Config.prototype.getBotResponseEndpoint = function (message) {
+    Config.prototype.getSmalltalkResponseEndpoint = function (message) {
         var environment;
         var data = {};
         environment = this.currentEnv;

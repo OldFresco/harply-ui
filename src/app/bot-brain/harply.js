@@ -20,16 +20,16 @@ var Harply = (function () {
         this.config = config;
         this.convoService = convoService;
         convoService.userSpoke$.subscribe(function (userMessage) {
-            _this.http.get(_this.config.getBotResponseEndpoint(userMessage.content) + 'd')
+            _this.http.get(_this.config.getSmalltalkResponseEndpoint(userMessage.content))
                 .subscribe(function (response) {
-                _this.handleResponse(response);
+                _this.makeSmalltalk(response);
             }, function (errorMessage) {
-                _this.errorMessage = errorMessage;
-                console.log(_this.errorMessage);
-                _this.convoService.announceNewBotMessage(_this.returnErrorBotResponse());
+                console.log(errorMessage);
+                _this.convoService.announceNewBotMessage(_this.saySomethingWentWrong());
             });
         });
     }
+    //Abilities
     Harply.prototype.getMeme = function () {
         var botResponse = new chatmessage_1.ChatMessage();
         botResponse.isBot = true;
@@ -38,7 +38,13 @@ var Harply = (function () {
         botResponse.imgLink = 'mockimg.jpg';
         return botResponse;
     };
-    Harply.prototype.handleResponse = function (response) {
+    Harply.prototype.saySomethingWentWrong = function () {
+        var botResponse = new chatmessage_1.ChatMessage();
+        botResponse.content = 'Erm... Sorry but didn\'t quite catch that for whatever reason. :(';
+        botResponse.isBot = true;
+        return botResponse;
+    };
+    Harply.prototype.makeSmalltalk = function (response) {
         var responseMessage = this.extractData(response);
         var botResponse = new chatmessage_1.ChatMessage();
         botResponse.content = this.convertName(responseMessage);
@@ -46,12 +52,7 @@ var Harply = (function () {
         botResponse.hasImg = false;
         this.convoService.announceNewBotMessage(botResponse);
     };
-    Harply.prototype.returnErrorBotResponse = function () {
-        var botResponse = new chatmessage_1.ChatMessage();
-        botResponse.content = 'Erm... Sorry but didn\'t quite catch that for whatever reason. :(';
-        botResponse.isBot = true;
-        return botResponse;
-    };
+    //Utilities
     Harply.prototype.extractData = function (response) {
         var body = response.json();
         return body.message.message || { 'message': 'Sorry... say that again?' };

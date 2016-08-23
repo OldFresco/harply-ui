@@ -8,23 +8,21 @@ import { Observable }     from 'rxjs/Observable';
 @Injectable()
 export class Harply {
 
-    private errorMessage: string;
-
     constructor(private http: Http, private config: Config, private convoService: ConvoService) {
         convoService.userSpoke$.subscribe(
             (userMessage) => {
-                this.http.get(this.config.getBotResponseEndpoint(userMessage.content)+'d')
+                this.http.get(this.config.getSmalltalkResponseEndpoint(userMessage.content))
                     .subscribe(
                     (response) => {
-                        this.handleResponse(response);
+                        this.makeSmalltalk(response);
                     }, (errorMessage) => {
-                        this.errorMessage = errorMessage;
-                        console.log(this.errorMessage);
-                        this.convoService.announceNewBotMessage(this.returnErrorBotResponse());
+                        console.log(errorMessage);
+                        this.convoService.announceNewBotMessage(this.saySomethingWentWrong());
                     });
             });
     }
 
+    //Abilities
     private getMeme(): ChatMessage {
         let botResponse = new ChatMessage();
 
@@ -36,7 +34,15 @@ export class Harply {
         return botResponse;
     }
 
-    private handleResponse(response) {
+    private saySomethingWentWrong(): ChatMessage {
+        let botResponse = new ChatMessage();
+        botResponse.content = 'Erm... Sorry but didn\'t quite catch that for whatever reason. :(';
+        botResponse.isBot = true;
+
+        return botResponse;
+    }
+
+    private makeSmalltalk(response) {
         let responseMessage = this.extractData(response);
         let botResponse = new ChatMessage();
         botResponse.content = this.convertName(responseMessage);
@@ -45,14 +51,7 @@ export class Harply {
         this.convoService.announceNewBotMessage(botResponse);
     }
 
-    private returnErrorBotResponse(): ChatMessage {
-        let botResponse = new ChatMessage();
-        botResponse.content = 'Erm... Sorry but didn\'t quite catch that for whatever reason. :(';
-        botResponse.isBot = true;
-
-        return botResponse;
-    }
-
+    //Utilities
     private extractData(response: Response) {
         let body = response.json();
         return body.message.message || { 'message': 'Sorry... say that again?' };

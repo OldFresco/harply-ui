@@ -55,7 +55,7 @@ export class Config {
         return data[value];
     }
 
-    public getBotResponseEndpoint(message) {
+    public getSmalltalkResponseEndpoint(message) {
         let environment: string;
         let data = {};
 

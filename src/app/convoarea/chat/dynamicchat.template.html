@@ -6,6 +6,6 @@
 <div *ngIf="isBot" class="bot-bubble tri-right border round btm-left-in fade-in slow">
     <div class=" talktext talktext-bot ">
         <p><mark class="chat-prefix-bot"><img src="favicon.ico"> Harply:</mark> {{message.content}}</p>
-        <img *ngIf="hasImg" src="{{message.imgLink}}">
+        <img style="width: 100%" *ngIf="hasImg" src="{{message.imgLink}}">
     </div>
 </div>

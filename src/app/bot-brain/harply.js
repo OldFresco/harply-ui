@@ -20,23 +20,34 @@ var Harply = (function () {
         this.config = config;
         this.convoService = convoService;
         convoService.userSpoke$.subscribe(function (userMessage) {
-            _this.http.get(_this.config.getSmalltalkResponseEndpoint(userMessage.content))
-                .subscribe(function (response) {
-                _this.makeSmalltalk(response);
-            }, function (errorMessage) {
-                console.log(errorMessage);
-                _this.convoService.announceNewBotMessage(_this.saySomethingWentWrong());
-            });
+            if (userMessage.content === 'meme me') {
+                _this.http.get('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC')
+                    .subscribe(function (response) {
+                    _this.getMeme(_this.extractMemeLink(response));
+                }, function (errorMessage) {
+                    console.log(errorMessage);
+                    _this.convoService.announceNewBotMessage(_this.saySomethingWentWrong());
+                });
+            }
+            else {
+                _this.http.get(_this.config.getSmalltalkResponseEndpoint(userMessage.content))
+                    .subscribe(function (response) {
+                    _this.makeSmalltalk(response);
+                }, function (errorMessage) {
+                    console.log(errorMessage);
+                    _this.convoService.announceNewBotMessage(_this.saySomethingWentWrong());
+                });
+            }
         });
     }
     //Abilities
-    Harply.prototype.getMeme = function () {
+    Harply.prototype.getMeme = function (imgLink) {
         var botResponse = new chatmessage_1.ChatMessage();
         botResponse.isBot = true;
         botResponse.hasImg = true;
         botResponse.content = '';
-        botResponse.imgLink = 'mockimg.jpg';
-        return botResponse;
+        botResponse.imgLink = imgLink;
+        this.convoService.announceNewBotMessage(botResponse);
     };
     Harply.prototype.saySomethingWentWrong = function () {
         var botResponse = new chatmessage_1.ChatMessage();
@@ -45,7 +56,7 @@ var Harply = (function () {
         return botResponse;
     };
     Harply.prototype.makeSmalltalk = function (response) {
-        var responseMessage = this.extractData(response);
+        var responseMessage = this.extractSmalltalkMessage(response);
         var botResponse = new chatmessage_1.ChatMessage();
         botResponse.content = this.convertName(responseMessage);
         botResponse.isBot = true;
@@ -53,9 +64,13 @@ var Harply = (function () {
         this.convoService.announceNewBotMessage(botResponse);
     };
     //Utilities
-    Harply.prototype.extractData = function (response) {
+    Harply.prototype.extractSmalltalkMessage = function (response) {
         var body = response.json();
         return body.message.message || { 'message': 'Sorry... say that again?' };
+    };
+    Harply.prototype.extractMemeLink = function (response) {
+        var body = response.json();
+        return body.data.image_url || { 'message': 'Sorry... say that again?' };
     };
     Harply.prototype.convertName = function (message) {
         var convertedName = 'Harply';

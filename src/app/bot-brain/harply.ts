@@ -11,27 +11,41 @@ export class Harply {
     constructor(private http: Http, private config: Config, private convoService: ConvoService) {
         convoService.userSpoke$.subscribe(
             (userMessage) => {
-                this.http.get(this.config.getSmalltalkResponseEndpoint(userMessage.content))
-                    .subscribe(
-                    (response) => {
-                        this.makeSmalltalk(response);
-                    }, (errorMessage) => {
-                        console.log(errorMessage);
-                        this.convoService.announceNewBotMessage(this.saySomethingWentWrong());
-                    });
+
+                if (userMessage.content === 'meme me') {
+                    this.http.get('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC')
+                        .subscribe(
+                        (response) => {
+                            this.getMeme(this.extractMemeLink(response));
+                        }, (errorMessage) => {
+                            console.log(errorMessage);
+                            this.convoService.announceNewBotMessage(this.saySomethingWentWrong());
+                        });
+                }
+                else {
+                    this.http.get(this.config.getSmalltalkResponseEndpoint(userMessage.content))
+                        .subscribe(
+                        (response) => {
+                            this.makeSmalltalk(response);
+                        }, (errorMessage) => {
+                            console.log(errorMessage);
+                            this.convoService.announceNewBotMessage(this.saySomethingWentWrong());
+                        });
+                }
             });
     }
 
     //Abilities
-    private getMeme(): ChatMessage {
+    private getMeme(imgLink) {
+
         let botResponse = new ChatMessage();
 
         botResponse.isBot = true;
         botResponse.hasImg = true;
         botResponse.content = '';
-        botResponse.imgLink = 'mockimg.jpg';
+        botResponse.imgLink = imgLink;
 
-        return botResponse;
+        this.convoService.announceNewBotMessage(botResponse);
     }
 
     private saySomethingWentWrong(): ChatMessage {
@@ -43,18 +57,25 @@ export class Harply {
     }
 
     private makeSmalltalk(response) {
-        let responseMessage = this.extractData(response);
+        let responseMessage = this.extractSmalltalkMessage(response);
         let botResponse = new ChatMessage();
+
         botResponse.content = this.convertName(responseMessage);
         botResponse.isBot = true;
         botResponse.hasImg = false;
+
         this.convoService.announceNewBotMessage(botResponse);
     }
 
     //Utilities
-    private extractData(response: Response) {
+    private extractSmalltalkMessage(response: Response) {
         let body = response.json();
         return body.message.message || { 'message': 'Sorry... say that again?' };
+    }
+
+    private extractMemeLink(response: Response) {
+        let body = response.json();
+        return body.data.image_url || { 'message': 'Sorry... say that again?' };
     }
 
     private convertName(message: string) {

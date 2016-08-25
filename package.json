@@ -5,8 +5,6 @@
     "repository": "https://github.com/OldFresco/harply-ui",
     "scripts": {
         "lite": "lite-server",
-        "tsc": "tsc",
-        "tsc:w": "tsc -w",
         "typings": "typings",
         "tslint": "tslint",
         "lint": "npm run tslint \"src/**/*.ts\"",
@@ -15,7 +13,7 @@
         "post-install": "npm run typings-install",
         "build": "webpack --inline --colors --progress --display-error-details --display-cached",
         "watch": "npm run build -- --watch",
-        "server": "webpack-dev-server --inline --colors --progress --display-error-details --display-cached --port 3000  --content-base src",
+        "server": "webpack-dev-server --inline --colors --progress --display-error-details --display-cached --port 8000  --content-base src",
         "start": "npm run server"
     },
     "dependencies": {

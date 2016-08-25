@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ChatMessage } from '../../models/chatmessage';
 
 @Component({
-    moduleId: module.id,
     selector: 'dynamicchat',
     templateUrl: './dynamicchat.template.html'
 })

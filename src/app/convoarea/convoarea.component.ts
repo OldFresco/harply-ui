@@ -9,7 +9,6 @@ import { DynamicChatComponent } from './chat/dynamicchat.component';
 import { Http, Response } from '@angular/http';
 
 @Component({
-    moduleId: module.id,
     selector: 'convoarea',
     templateUrl: './convoarea.template.html',
     directives: [BotChatComponent, UserChatComponent, DynamicChatComponent]

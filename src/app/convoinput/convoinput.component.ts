@@ -3,7 +3,6 @@ import { ConvoService } from '../services/convo.service';
 import { ChatMessage } from '../models/chatmessage';
 
 @Component({
-  moduleId: module.id,
   selector: 'convo-input',
   templateUrl: './convoinput.template.html',
 })

@@ -1,0 +1,365 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat+Alternates);
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(26, 188, 156);
+}
+
+.chat-prefix-bot {
+    font-size: inherit;
+    font-style: inherit;
+    font: inherit;
+    color: darksalmon;
+    padding: .1em;
+}
+
+.chat-prefix-user {
+    font-size: inherit;
+    font-style: inherit;
+    font: inherit;
+    color: cadetblue;
+    padding: .1em;
+}
+
+.convoinput {
+    z-index: 500;
+    position: fixed;
+    display: block;
+    width: 100%;
+}
+
+.convoarea {
+    position: relative!important;
+    padding-top: 180px;
+    padding-right: 35px;
+    padding-left: 35px;
+}
+
+.field {
+    display: flex;
+    position: realtive;
+    margin: 5em auto;
+    width: 70%;
+    flex-direction: row;
+    box-shadow: 1px 1px 0 rgb(22, 160, 133), 2px 2px 0 rgb(22, 160, 133), 3px 3px 0 rgb(22, 160, 133), 4px 4px 0 rgb(22, 160, 133), 5px 5px 0 rgb(22, 160, 133), 6px 6px 0 rgb(22, 160, 133), 7px 7px 0 rgb(22, 160, 133);
+}
+
+.field>input[type=text],
+.field>button {
+    display: block;
+    font: 1.2em 'Montserrat Alternates';
+}
+
+.field>input[type=text] {
+    flex: 1;
+    padding: 0.6em;
+    border: 0.2em solid rgb(26, 188, 156);
+}
+
+.field>button {
+    padding: 0.6em 0.8em;
+    background-color: rgb(26, 218, 156);
+    color: white;
+    border: none;
+}
+
+
+/* talk bubble contents */
+
+.talktext {
+    font: 1.2em 'Montserrat Alternates';
+    padding: 1em;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.text-generic {
+    font: 1.2em 'Montserrat Alternates';
+    padding: 1em;
+    word-wrap: break-word;
+    color: papayawhip;
+    padding: 13%;
+}
+
+.talktext-bot p {
+    /* remove webkit p margins */
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    font-size: x-large;
+    color: antiquewhite;
+    font-weight: bold;
+}
+
+.talktext-user p {
+    /* remove webkit p margins */
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    font-size: x-large;
+    font-weight: bold;
+    color: darksalmon;
+}
+
+.user-bubble {
+    max-width: 480px;
+    margin: 40px;
+    position: relative;
+    height: auto;
+    background-color: moccasin;
+    text-align: right;
+    transition: 0.2s ease-in-out;
+    float: right;
+    clear: both;
+}
+
+.user-bubble:hover {
+    padding: 1%;
+}
+
+.bot-bubble {
+    float: left;
+    position: relative;
+    height: auto;
+    background-color: darksalmon;
+    transition: 0.2s ease-in-out;
+    max-width: 480px;
+    display: inline-block;
+    clear: both;
+}
+
+.bot-bubble:hover {
+    padding: 1%;
+}
+
+.border {
+    border: 8px solid rgb(22, 160, 133);
+}
+
+.round {
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+}
+
+.tri-right.border.left-in:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -40px;
+    right: auto;
+    top: 30px;
+    bottom: auto;
+    border: 20px solid;
+    border-color: #666 #666 transparent transparent;
+}
+
+.tri-right.left-in:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -20px;
+    right: auto;
+    top: 38px;
+    bottom: auto;
+    border: 12px solid;
+    border-color: lightyellow lightyellow transparent transparent;
+}
+
+.tri-right.border.btm-left:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -8px;
+    right: auto;
+    top: auto;
+    bottom: -40px;
+    border: 32px solid;
+    border-color: transparent transparent transparent #666;
+}
+
+.tri-right.btm-left:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 0px;
+    right: auto;
+    top: auto;
+    bottom: -20px;
+    border: 22px solid;
+    border-color: transparent transparent transparent lightyellow;
+}
+
+
+/*Right triangle, placed bottom left side slightly in*/
+
+.tri-right.border.btm-left-in:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 30px;
+    right: auto;
+    top: auto;
+    bottom: -40px;
+    border: 20px solid;
+    border-color: rgb(22, 160, 133) transparent transparent rgb(22, 160, 133);
+}
+
+.tri-right.btm-left-in:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 38px;
+    right: auto;
+    top: auto;
+    bottom: -20px;
+    border: 12px solid;
+    border-color: darksalmon transparent transparent darksalmon;
+}
+
+.tri-right.border.btm-right-in:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: 30px;
+    bottom: -40px;
+    border: 20px solid;
+    border-color: rgb(22, 160, 133) rgb(22, 160, 133) transparent transparent;
+}
+
+.tri-right.btm-right-in:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: 38px;
+    bottom: -20px;
+    border: 12px solid;
+    border-color: moccasin moccasin transparent transparent;
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    /* make things invisible upon start */
+    -webkit-animation: fadeIn ease-in 1;
+    /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation: fadeIn ease-in 1;
+    animation: fadeIn ease-in 1;
+    -webkit-animation-fill-mode: forwards;
+    /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    -moz-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    animation-duration: 1s;
+}
+
+.fade-in.quick {
+    -webkit-animation-delay: 0.2s;
+    -moz-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+
+.fade-in.slow {
+    -webkit-animation-delay: 0.7s;
+    -moz-animation-delay: 0.7s;
+    animation-delay: 0.7s;
+}
+
+.spinner {
+    margin: 100px auto;
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.spinner > div {
+    background-color: darksalmon;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+        -webkit-transform: scaleY(0.4)
+    }
+    20% {
+        -webkit-transform: scaleY(1.0)
+    }
+}
+
+@keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+    }
+    20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+    }
+}

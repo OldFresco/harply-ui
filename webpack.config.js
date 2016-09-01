@@ -1,22 +1,39 @@
-var webpack = require('webpack');
-var path = require('path');
+var webpack = require('webpack')
+var path = require('path')
+const helper = require('./hepler')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin')
 
+console.log(helper.root('src/assets'));
 
 // Webpack Config
 var webpackConfig = {
     entry: {
         'polyfills': './src/polyfills.browser.ts',
         'vendor': './src/vendor.browser.ts',
-        'main': './src/app/main.ts',
+        'main': './src/app/main.ts'
     },
 
     output: {
-        path: './dist',
+        path: './dist'
     },
 
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.optimize.CommonsChunkPlugin({ name: ['main', 'vendor', 'polyfills'], minChunks: Infinity }),
+        new CopyWebpackPlugin([{
+            from: helper.root('src/assets'),
+            to: 'assets'
+        }]),
+        new CopyWebpackPlugin([{
+            from: helper.root('src/index.html'),
+            to: 'index.html'
+        }]),
+        new CopyWebpackPlugin([{
+            from: helper.root('src/css'),
+            to: 'css'
+        }])
     ],
 
     module: {
@@ -28,8 +45,7 @@ var webpackConfig = {
         ]
     }
 
-};
-
+}
 
 // Our Webpack Defaults
 var defaultConfig = {
@@ -60,7 +76,7 @@ var defaultConfig = {
         clearImmediate: 0,
         setImmediate: 0
     }
-};
+}
 
-var webpackMerge = require('webpack-merge');
-module.exports = webpackMerge(defaultConfig, webpackConfig);
+var webpackMerge = require('webpack-merge')
+module.exports = webpackMerge(defaultConfig, webpackConfig)
